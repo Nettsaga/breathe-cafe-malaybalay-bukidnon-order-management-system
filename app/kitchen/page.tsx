@@ -111,12 +111,26 @@ export default function KitchenPage() {
   const advance = useCallback(async (order: Order) => {
     const next = NEXT_STATUS[order.status];
     if (!next) return;
-    await fetch(`/api/orders/${order.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: next }),
-    });
-    // SSE will echo the update back; no optimistic write needed.
+    // Optimistic: move the card immediately so the board feels instant. We
+    // can't rely on the SSE echo here — on serverless the PATCH and the open
+    // stream run on different instances, so the in-memory event bus never
+    // delivers the update back to this client. Revert if the request fails.
+    const prevStatus = order.status;
+    setOrders((prev) =>
+      prev.map((o) => (o.id === order.id ? { ...o, status: next } : o))
+    );
+    try {
+      const res = await fetch(`/api/orders/${order.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: next }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    } catch {
+      setOrders((prev) =>
+        prev.map((o) => (o.id === order.id ? { ...o, status: prevStatus } : o))
+      );
+    }
   }, []);
 
   const printTicket = useCallback((order: Order) => {

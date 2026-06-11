@@ -136,10 +136,10 @@
       }
     ],
     "total": 640,
-    "status": "preparing",
+    "status": "ready",
     "paymentStatus": "paid",
     "createdAt": "2026-06-11T19:20:21.074Z",
-    "updatedAt": "2026-06-11T20:37:29.341Z",
+    "updatedAt": "2026-06-11T22:18:22.230Z",
     "paymentRef": "pi_jLVXZGV7En8i1fiRazKE9VYL"
   },
   {
@@ -386,5 +386,25 @@
     "paymentStatus": "unpaid",
     "createdAt": "2026-06-11T21:59:55.695Z",
     "updatedAt": "2026-06-11T21:59:55.695Z"
+  },
+  {
+    "id": "BRC-LRGBJ",
+    "tableId": "table-7",
+    "tableLabel": "Table 7",
+    "items": [
+      {
+        "menuItemId": "iced-spanish-latte",
+        "name": "Iced Spanish Latte",
+        "price": 160,
+        "qty": 1,
+        "optionsLabel": "Regular · 100%"
+      }
+    ],
+    "total": 160,
+    "status": "preparing",
+    "paymentStatus": "paid",
+    "createdAt": "2026-06-11T22:17:40.031Z",
+    "updatedAt": "2026-06-11T22:18:17.627Z",
+    "paymentRef": "pi_1wXMSV3HwZ4jDxFdFSiFt7iG"
   }
 ]

@@ -155,9 +155,15 @@ export default function MenuBrowser({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function handleTap(item: MenuItem) {
+  // Tapping the product always opens its detail/description page.
+  function openDetail(item: MenuItem) {
+    router.push(`/t/${table.id}/item/${item.id}`);
+  }
+
+  // The + button: quick-adds option-less items; opens detail to customize otherwise.
+  function quickAdd(item: MenuItem) {
     if (item.options && item.options.length > 0) {
-      router.push(`/t/${table.id}/item/${item.id}`);
+      openDetail(item);
     } else {
       addConfigured(item, []);
     }
@@ -233,7 +239,8 @@ export default function MenuBrowser({
                   item={item}
                   index={i}
                   qty={mounted ? qtyOf(item.id) : 0}
-                  onTap={handleTap}
+                  onOpen={openDetail}
+                  onAdd={quickAdd}
                 />
               ))}
             </div>
@@ -289,7 +296,8 @@ export default function MenuBrowser({
                       item={item}
                       index={i}
                       qty={mounted ? qtyOf(item.id) : 0}
-                      onTap={handleTap}
+                      onOpen={openDetail}
+                      onAdd={quickAdd}
                     />
                   ))}
                 </div>
@@ -328,12 +336,14 @@ function ProductCard({
   item,
   index,
   qty,
-  onTap,
+  onOpen,
+  onAdd,
 }: {
   item: MenuItem;
   index: number;
   qty: number;
-  onTap: (item: MenuItem) => void;
+  onOpen: (item: MenuItem) => void; // tap product → description
+  onAdd: (item: MenuItem) => void; // + → quick add / customize
 }) {
   const soldOut = !item.available;
   return (
@@ -348,40 +358,49 @@ function ProductCard({
       }}
       className={`flex flex-col items-center text-center ${soldOut ? "opacity-50" : ""}`}
     >
-      <button
-        onClick={() => !soldOut && onTap(item)}
-        disabled={soldOut}
-        className="relative w-full aspect-square flex items-center justify-center mb-1"
-      >
-        <div className="absolute inset-0 halo" />
-        {item.imageUrl && (
-          <div className="relative w-[82%] aspect-square rounded-full overflow-hidden shadow-md">
-            <Image
-              src={item.imageUrl}
-              alt={item.name}
-              fill
-              sizes="(max-width:480px) 40vw, 160px"
-              className="object-cover"
-            />
-          </div>
-        )}
+      {/* Image — tapping it opens the product's description */}
+      <div className="relative w-full aspect-square flex items-center justify-center mb-1">
+        <button
+          onClick={() => !soldOut && onOpen(item)}
+          disabled={soldOut}
+          aria-label={`View ${item.name}`}
+          className="absolute inset-0 flex items-center justify-center"
+        >
+          <div className="absolute inset-0 halo" />
+          {item.imageUrl && (
+            <div className="relative w-[82%] aspect-square rounded-full overflow-hidden shadow-md">
+              <Image
+                src={item.imageUrl}
+                alt={item.name}
+                fill
+                sizes="(max-width:480px) 40vw, 160px"
+                className="object-cover"
+              />
+            </div>
+          )}
+        </button>
         {qty > 0 && (
-          <span className="absolute top-1 right-3 bg-brand text-white text-xs font-bold rounded-full min-w-6 h-6 px-1.5 flex items-center justify-center shadow">
+          <span className="pointer-events-none absolute top-1 right-3 bg-brand text-white text-xs font-bold rounded-full min-w-6 h-6 px-1.5 flex items-center justify-center shadow">
             {qty}
           </span>
         )}
+        {/* + button — adds to cart (or opens customization for items with options) */}
         {!soldOut && (
-          <span className="absolute bottom-0 right-3 w-9 h-9 rounded-full bg-accent text-white flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+          <button
+            onClick={() => onAdd(item)}
+            aria-label={`Add ${item.name}`}
+            className="absolute bottom-0 right-3 w-9 h-9 rounded-full bg-accent text-white flex items-center justify-center shadow-lg active:scale-90 transition-transform"
+          >
             <Plus className="w-5 h-5" strokeWidth={2.5} />
-          </span>
+          </button>
         )}
-      </button>
+      </div>
 
       {item.seriesLabel && (
         <p className="series-label mb-0.5">{item.seriesLabel}</p>
       )}
       <button
-        onClick={() => !soldOut && onTap(item)}
+        onClick={() => !soldOut && onOpen(item)}
         disabled={soldOut}
         className="font-semibold text-sm leading-snug line-clamp-2"
       >

@@ -2,7 +2,7 @@
   {
     "id": "iced-spanish-latte",
     "name": "Iced Spanish Latte",
-    "description": "Our best-seller — sweet, creamy, and ice-cold.",
+    "description": "Velvety espresso, fresh milk, and condensed milk over ice — sweet, smooth, and impossible to put down.",
     "price": 160,
     "category": "Signature",
     "imageUrl": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=70",
@@ -84,7 +84,7 @@
   {
     "id": "caramel-macchiato",
     "name": "Caramel Macchiato",
-    "description": "Espresso and milk with vanilla and a caramel drizzle.",
+    "description": "Espresso and milk crowned with vanilla and a slow ribbon of caramel.",
     "price": 170,
     "category": "Signature",
     "imageUrl": "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=70",
@@ -161,7 +161,7 @@
   {
     "id": "sea-salt-latte",
     "name": "Sea Salt Cream Latte",
-    "description": "Smooth espresso topped with lightly salted cream.",
+    "description": "Bold espresso under a cloud of lightly salted cream — where sweet meets savory.",
     "price": 165,
     "category": "Signature",
     "imageUrl": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=70",
@@ -214,7 +214,7 @@
   {
     "id": "espresso",
     "name": "Espresso",
-    "description": "A bold single shot of our house blend — rich crema, deep aroma.",
+    "description": "A single, full-bodied shot from our house blend — deep, aromatic, and honest.",
     "price": 90,
     "category": "Hot Coffee",
     "imageUrl": "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=600&q=70",
@@ -244,7 +244,7 @@
   {
     "id": "cappuccino",
     "name": "Cappuccino",
-    "description": "Espresso, steamed milk, and a thick, pillowy layer of foam.",
+    "description": "Equal parts espresso, steamed milk, and airy foam — the classic done right.",
     "price": 130,
     "category": "Hot Coffee",
     "imageUrl": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=600&q=70",
@@ -314,7 +314,7 @@
   {
     "id": "cafe-latte",
     "name": "Cafe Latte",
-    "description": "Smooth espresso folded into velvety steamed milk.",
+    "description": "Smooth espresso married with silky steamed milk for an easy, comforting cup.",
     "price": 140,
     "category": "Hot Coffee",
     "imageUrl": "https://images.unsplash.com/photo-1561882468-9110e03e0f78?auto=format&fit=crop&w=600&q=70",
@@ -384,7 +384,7 @@
   {
     "id": "hot-choco",
     "name": "Hot Chocolate",
-    "description": "Rich dark chocolate melted into steamed milk.",
+    "description": "Rich dark chocolate melted into steamed milk — pure cozy in a cup.",
     "price": 130,
     "category": "Hot Coffee",
     "imageUrl": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=600&q=70",
@@ -426,7 +426,7 @@
   {
     "id": "iced-americano",
     "name": "Iced Americano",
-    "description": "Chilled espresso over ice and cold water — clean and crisp.",
+    "description": "Espresso over ice and chilled water — crisp, clean, and wide-awake refreshing.",
     "price": 120,
     "category": "Iced Coffee",
     "imageUrl": "https://images.unsplash.com/photo-1517959105821-eaf2591984ca?auto=format&fit=crop&w=600&q=70",
@@ -491,7 +491,7 @@
   {
     "id": "iced-cafe-latte",
     "name": "Iced Cafe Latte",
-    "description": "Espresso and cold milk over ice — simple and smooth.",
+    "description": "Chilled espresso and fresh milk over ice — mellow, creamy, and easy-going.",
     "price": 150,
     "category": "Iced Coffee",
     "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=70",
@@ -561,7 +561,7 @@
   {
     "id": "iced-mocha",
     "name": "Iced Mocha",
-    "description": "Espresso, chocolate, and cold milk over ice.",
+    "description": "Espresso, dark chocolate, and cold milk over ice — dessert that drinks like coffee.",
     "price": 160,
     "category": "Iced Coffee",
     "imageUrl": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=600&q=70",
@@ -613,7 +613,7 @@
   {
     "id": "matcha-mango",
     "name": "Matcha Mango",
-    "description": "Creamy matcha layered with sweet ripe mango.",
+    "description": "Stone-ground matcha layered with ripe mango — earthy, fruity, and bright.",
     "price": 150,
     "category": "Matcha Series",
     "imageUrl": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=70",
@@ -685,7 +685,7 @@
   {
     "id": "matcha-caramel-latte",
     "name": "Matcha Caramel Latte",
-    "description": "Earthy matcha with a sweet golden caramel drizzle.",
+    "description": "Smooth matcha kissed with golden caramel and fresh milk.",
     "price": 150,
     "category": "Matcha Series",
     "imageUrl": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=70",
@@ -738,7 +738,7 @@
   {
     "id": "matcha-cookie-latte",
     "name": "Matcha Cookie Latte",
-    "description": "Matcha with crushed cookie crumble and cream.",
+    "description": "Creamy matcha folded with buttery cookie crumble in every sip.",
     "price": 160,
     "category": "Matcha Series",
     "imageUrl": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=70",
@@ -791,7 +791,7 @@
   {
     "id": "lychee-fizz",
     "name": "Lychee Con Nata Fizz",
-    "description": "Sparkling lychee refresher with creamy nata.",
+    "description": "Sparkling lychee with chewy nata — light, fizzy, and a little playful.",
     "price": 130,
     "category": "Fruit Tea",
     "imageUrl": "https://images.unsplash.com/photo-1437418747212-8d9709afab22?auto=format&fit=crop&w=600&q=70",
@@ -862,7 +862,7 @@
   {
     "id": "strawberry-smoothie",
     "name": "Strawberry Smoothie",
-    "description": "Blended fresh strawberries and creamy yogurt.",
+    "description": "Fresh strawberries blended with creamy yogurt — thick, fruity, and cold.",
     "price": 155,
     "category": "Fruit Tea",
     "imageUrl": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=70",
@@ -905,7 +905,7 @@
   {
     "id": "mango-fizz",
     "name": "Mango Yakult Fizz",
-    "description": "Tangy-sweet mango with a fizzy yakult kick.",
+    "description": "Sweet mango with a zippy yakult fizz — pure sunshine in a cup.",
     "price": 140,
     "category": "Fruit Tea",
     "imageUrl": "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=600&q=70",
@@ -958,7 +958,7 @@
   {
     "id": "butter-croissant",
     "name": "Butter Croissant",
-    "description": "Flaky, buttery, and baked fresh every morning.",
+    "description": "Golden, flaky layers baked fresh each morning — buttery to the last crumb.",
     "price": 95,
     "category": "Pastries",
     "imageUrl": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=70",
@@ -967,7 +967,7 @@
   {
     "id": "pain-au-chocolat",
     "name": "Pain au Chocolat",
-    "description": "Buttery pastry wrapped around dark chocolate batons.",
+    "description": "Buttery pastry wrapped around batons of dark chocolate, baked until crisp.",
     "price": 110,
     "category": "Pastries",
     "imageUrl": "https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=600&q=70",
@@ -976,7 +976,7 @@
   {
     "id": "cinnamon-roll",
     "name": "Cinnamon Roll",
-    "description": "Soft swirl with cinnamon sugar and cream cheese glaze.",
+    "description": "A warm, gooey swirl of cinnamon sugar under a tangy cream-cheese glaze.",
     "price": 120,
     "category": "Pastries",
     "imageUrl": "https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=600&q=70",
@@ -985,7 +985,7 @@
   {
     "id": "choco-chip-cookie",
     "name": "Chocolate Chip Cookie",
-    "description": "Soft-baked with melty Belgian chocolate chunks.",
+    "description": "Soft-baked and loaded with melty Belgian chocolate chunks.",
     "price": 70,
     "category": "Pastries",
     "imageUrl": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=70",
@@ -994,7 +994,7 @@
   {
     "id": "ube-halaya-cake",
     "name": "Classic Ube Halaya Cake",
-    "description": "Three layers of soft ube sponge and halaya cream.",
+    "description": "Three pillowy layers of ube sponge and sweet halaya cream.",
     "price": 170,
     "category": "Cakes",
     "imageUrl": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=70",
@@ -1005,7 +1005,7 @@
   {
     "id": "blueberry-cheesecake",
     "name": "Blueberry Cheesecake",
-    "description": "Creamy cheesecake with a bright blueberry compote.",
+    "description": "Lush, creamy cheesecake topped with a bright blueberry swirl.",
     "price": 145,
     "category": "Cakes",
     "imageUrl": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=70",
@@ -1015,7 +1015,7 @@
   {
     "id": "chocolate-cake",
     "name": "Devil's Chocolate Cake",
-    "description": "Rich, fudgy chocolate cake with dark ganache.",
+    "description": "Dark, fudgy layers blanketed in glossy chocolate ganache.",
     "price": 160,
     "category": "Cakes",
     "imageUrl": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=70",
@@ -1024,7 +1024,7 @@
   {
     "id": "clubhouse-sandwich",
     "name": "Clubhouse Sandwich",
-    "description": "Triple-decker with chicken, egg, and crispy bacon.",
+    "description": "A towering triple-decker of chicken, egg, crispy bacon, and fresh greens.",
     "price": 220,
     "category": "Meals",
     "imageUrl": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=70",
@@ -1033,7 +1033,7 @@
   {
     "id": "carbonara",
     "name": "Creamy Carbonara",
-    "description": "Pasta in a rich cream and bacon sauce.",
+    "description": "Pasta tossed in a rich, silky cream sauce with smoky bacon.",
     "price": 240,
     "category": "Meals",
     "imageUrl": "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=600&q=70",
@@ -1042,7 +1042,7 @@
   {
     "id": "chicken-pesto-pasta",
     "name": "Chicken Pesto Pasta",
-    "description": "Basil pesto, grilled chicken, and parmesan.",
+    "description": "Basil pesto, grilled chicken, and parmesan over al dente pasta.",
     "price": 250,
     "category": "Meals",
     "imageUrl": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=600&q=70",
@@ -1051,7 +1051,7 @@
   {
     "id": "fries",
     "name": "Truffle Fries",
-    "description": "Hand-cut fries tossed in truffle oil and parmesan.",
+    "description": "Hand-cut fries tossed in truffle oil and showered with parmesan.",
     "price": 150,
     "category": "Meals",
     "imageUrl": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=70",
@@ -1060,7 +1060,7 @@
   {
     "id": "brown-sugar-latte",
     "name": "Brown Sugar Oat Latte",
-    "description": "Espresso and oat milk with caramelized brown sugar.",
+    "description": "Espresso and oat milk swirled with slow-caramelized brown sugar.",
     "price": 165,
     "category": "Signature",
     "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=70",
@@ -1131,7 +1131,7 @@
   {
     "id": "iced-vanilla-latte",
     "name": "Iced Vanilla Latte",
-    "description": "Cold milk, espresso, and sweet vanilla over ice.",
+    "description": "Cold milk, espresso, and sweet vanilla over ice — simple, smooth, and lovely.",
     "price": 150,
     "category": "Iced Coffee",
     "imageUrl": "https://images.unsplash.com/photo-1561882468-9110e03e0f78?auto=format&fit=crop&w=600&q=70",
@@ -1183,7 +1183,7 @@
   {
     "id": "matcha-strawberry-latte",
     "name": "Matcha Strawberry Latte",
-    "description": "Creamy matcha layered with sweet strawberry.",
+    "description": "Creamy matcha layered with sweet strawberry — pretty, fresh, and fruity.",
     "price": 160,
     "category": "Matcha Series",
     "imageUrl": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=70",
@@ -1236,7 +1236,7 @@
   {
     "id": "lychee-frappe",
     "name": "Lychee Frappé",
-    "description": "Blended icy lychee with a cloud of cream on top.",
+    "description": "Icy blended lychee under a soft, pillowy cloud of cream.",
     "price": 160,
     "category": "Fruit Tea",
     "imageUrl": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=70",
@@ -1284,7 +1284,7 @@
   {
     "id": "basque-cheesecake",
     "name": "Basque Burnt Cheesecake",
-    "description": "Caramelized top, soft and creamy center.",
+    "description": "Caramelized, crackly top giving way to a meltingly creamy center.",
     "price": 165,
     "category": "Cakes",
     "imageUrl": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=70",

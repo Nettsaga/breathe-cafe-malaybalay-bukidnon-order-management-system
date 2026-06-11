@@ -143,6 +143,15 @@ export default function OrderSummaryPanel({
             <LineRow key={l.id} line={l} inc={inc} dec={dec} />
           ))}
 
+          {/* Clear — wide button on desktop (mobile clears from the header) */}
+          <button
+            onClick={clear}
+            className="hidden lg:flex w-full mt-3 items-center justify-center gap-2 rounded-full border border-danger/30 text-danger font-medium px-6 py-3.5 text-sm hover:bg-danger/10 active:scale-95 transition"
+          >
+            <Trash2 className="w-4 h-4" />
+            Clear order
+          </button>
+
           <Link
             href={menuHref}
             className="btn-ghost w-full mt-3 block text-center text-sm"

@@ -43,7 +43,7 @@ export default async function TableHubPage({
     <div className="flex-1 flex flex-col bg-background lg:pl-24 xl:pl-28">
       {/* Greeting — soft brand-light band on mobile, clean white on desktop */}
       <header className="bg-brand-light lg:bg-transparent px-5 lg:px-8 pt-8 lg:pt-10 pb-5 lg:pb-1">
-        <div className="kiosk-container px-0">
+        <div className="max-w-md lg:max-w-5xl mx-auto w-full">
           <h1 className="text-2xl lg:text-4xl font-semibold leading-tight text-foreground">
             Good to see you :&gt;
           </h1>
@@ -55,55 +55,50 @@ export default async function TableHubPage({
         </div>
       </header>
 
-      <main className="flex-1 kiosk-container px-5 lg:px-8 py-5 lg:py-8 pb-28">
-        {/* Ranking + daily grind — side by side on desktop */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-6 lg:items-start">
-        {/* Brew-crew ranking */}
-        <div className="card p-5 mb-6 lg:mb-0 flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-brand-light flex items-center justify-center shrink-0">
-            <Coffee className="w-7 h-7 text-brand" strokeWidth={1.8} />
+      <main className="flex-1 max-w-md lg:max-w-5xl mx-auto w-full px-5 lg:px-8 py-5 lg:py-8 pb-28">
+        {/* Brew-crew ranking — full-width banner */}
+        <div className="card p-5 lg:p-6 mb-6 lg:mb-8 flex items-center gap-4">
+          <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-2xl bg-brand-light flex items-center justify-center shrink-0">
+            <Coffee className="w-7 h-7 lg:w-8 lg:h-8 text-brand" strokeWidth={1.8} />
           </div>
           <div className="min-w-0">
             <p className="text-muted text-xs uppercase tracking-wide">
               today&apos;s lineup
             </p>
-            <p className="text-lg font-semibold leading-tight">
+            <p className="text-lg lg:text-xl font-semibold leading-tight">
               You&apos;re <span className="text-brand">{hub.rankLabel}</span>.
               Welcome to the rush.
             </p>
           </div>
         </div>
 
-        {/* Fun stats */}
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <TrendingUp className="w-4 h-4 text-series" />
-            <h2 className="text-[15px] lg:text-lg font-semibold">the daily grind</h2>
-          </div>
-          <div className="space-y-2.5 mb-7 lg:mb-0">
-            {hub.funFacts.map((f, i) => {
-              const Icon = FACT_ICON[f.icon];
-              return (
-                <div
-                  key={i}
-                  className="bg-surface-muted/60 rounded-2xl px-4 py-3 flex items-center gap-3"
-                >
-                  <span className="w-9 h-9 rounded-xl bg-surface flex items-center justify-center shrink-0">
-                    <Icon className="w-[18px] h-[18px] text-brand" strokeWidth={1.8} />
-                  </span>
-                  <p className="text-sm text-foreground/90">{f.text}</p>
-                </div>
-              );
-            })}
-          </div>
+        {/* Daily grind — three-up on desktop */}
+        <div className="flex items-center gap-2 mb-3">
+          <TrendingUp className="w-4 h-4 text-series" />
+          <h2 className="text-[15px] lg:text-lg font-semibold">the daily grind</h2>
         </div>
+        <div className="space-y-2.5 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-4 mb-7 lg:mb-10">
+          {hub.funFacts.map((f, i) => {
+            const Icon = FACT_ICON[f.icon];
+            return (
+              <div
+                key={i}
+                className="bg-surface-muted/60 rounded-2xl px-4 py-3 flex items-center gap-3"
+              >
+                <span className="w-9 h-9 rounded-xl bg-surface flex items-center justify-center shrink-0">
+                  <Icon className="w-[18px] h-[18px] text-brand" strokeWidth={1.8} />
+                </span>
+                <p className="text-sm text-foreground/90">{f.text}</p>
+              </div>
+            );
+          })}
         </div>
-        {/* end ranking + daily grind grid */}
 
-        <div className="mt-7">
+        {/* The usual + last spotted — two-up on desktop */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-6 lg:items-start">
         {/* Don't know what to order? → the usual */}
         {hub.usualItem && (
-          <section className="mb-7">
+          <section className="mb-7 lg:mb-0">
             <h2 className="text-[15px] font-semibold">Don&apos;t know what to order?</h2>
             <p className="text-muted text-sm mb-3">
               Go for the usual of the {table.label} squad.
@@ -142,7 +137,7 @@ export default async function TableHubPage({
 
         {/* Recent orders at this table (if any) */}
         {hub.recent.length > 0 && (
-          <section className="mb-7">
+          <section className="mb-7 lg:mb-0">
             <h2 className="text-[15px] font-semibold mb-3">
               Last spotted at {table.label}
             </h2>
@@ -169,11 +164,13 @@ export default async function TableHubPage({
             </div>
           </section>
         )}
+        </div>
+        {/* end the-usual + last-spotted grid */}
 
         {/* Branch out */}
         {hub.popular.length > 0 && (
           <>
-            <h2 className="text-[15px] lg:text-lg font-semibold mb-3">
+            <h2 className="text-[15px] lg:text-lg font-semibold mb-3 mt-7 lg:mt-10">
               the {table.label} squad also swears by these
             </h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-6 lg:gap-y-10">
@@ -218,8 +215,6 @@ export default async function TableHubPage({
         >
           Browse full menu <ChevronRight className="w-4 h-4" />
         </Link>
-        </div>
-        {/* end content wrapper */}
       </main>
 
       <BottomNav tableId={table.id} />

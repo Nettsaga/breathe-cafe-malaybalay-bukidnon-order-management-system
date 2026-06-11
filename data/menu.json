@@ -1,0 +1,462 @@
+[
+  {
+    "id": "iced-spanish-latte",
+    "name": "Iced Spanish Latte",
+    "description": "Our best-seller — sweet, creamy, and ice-cold.",
+    "price": 160,
+    "category": "Signature",
+    "imageUrl": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "BEST SELLER",
+    "featured": true,
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s75", "label": "75%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]},
+      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 3, "choices": [
+        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 },
+        { "id": "pearls", "label": "Tapioca Pearls", "priceDelta": 20 },
+        { "id": "oat-milk", "label": "Oat Milk", "priceDelta": 30 }
+      ]}
+    ]
+  },
+  {
+    "id": "caramel-macchiato",
+    "name": "Caramel Macchiato",
+    "description": "Espresso and milk with vanilla and a caramel drizzle.",
+    "price": 170,
+    "category": "Signature",
+    "imageUrl": "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "FAN FAVORITE",
+    "featured": true,
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]},
+      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 3, "choices": [
+        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 },
+        { "id": "pearls", "label": "Tapioca Pearls", "priceDelta": 20 },
+        { "id": "extra-caramel", "label": "Extra Caramel", "priceDelta": 15 }
+      ]}
+    ]
+  },
+  {
+    "id": "sea-salt-latte",
+    "name": "Sea Salt Cream Latte",
+    "description": "Smooth espresso topped with lightly salted cream.",
+    "price": 165,
+    "category": "Signature",
+    "imageUrl": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "NEW",
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]}
+    ]
+  },
+  {
+    "id": "espresso",
+    "name": "Espresso",
+    "description": "A bold single shot of our house blend — rich crema, deep aroma.",
+    "price": 90,
+    "category": "Hot Coffee",
+    "imageUrl": "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "THE CLASSICS",
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Single", "priceDelta": 0 },
+        { "id": "double", "label": "Double", "priceDelta": 35 }
+      ]}
+    ]
+  },
+  {
+    "id": "cappuccino",
+    "name": "Cappuccino",
+    "description": "Espresso, steamed milk, and a thick, pillowy layer of foam.",
+    "price": 130,
+    "category": "Hot Coffee",
+    "imageUrl": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]},
+      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 3, "choices": [
+        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 },
+        { "id": "oat-milk", "label": "Oat Milk", "priceDelta": 30 }
+      ]}
+    ]
+  },
+  {
+    "id": "cafe-latte",
+    "name": "Cafe Latte",
+    "description": "Smooth espresso folded into velvety steamed milk.",
+    "price": 140,
+    "category": "Hot Coffee",
+    "imageUrl": "https://images.unsplash.com/photo-1561882468-9110e03e0f78?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]},
+      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 3, "choices": [
+        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 },
+        { "id": "oat-milk", "label": "Oat Milk", "priceDelta": 30 }
+      ]}
+    ]
+  },
+  {
+    "id": "hot-choco",
+    "name": "Hot Chocolate",
+    "description": "Rich dark chocolate melted into steamed milk.",
+    "price": 130,
+    "category": "Hot Coffee",
+    "imageUrl": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 2, "choices": [
+        { "id": "marshmallows", "label": "Marshmallows", "priceDelta": 15 }
+      ]}
+    ]
+  },
+  {
+    "id": "iced-americano",
+    "name": "Iced Americano",
+    "description": "Chilled espresso over ice and cold water — clean and crisp.",
+    "price": 120,
+    "category": "Iced Coffee",
+    "imageUrl": "https://images.unsplash.com/photo-1517959105821-eaf2591984ca?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]},
+      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 2, "choices": [
+        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 }
+      ]}
+    ]
+  },
+  {
+    "id": "iced-cafe-latte",
+    "name": "Iced Cafe Latte",
+    "description": "Espresso and cold milk over ice — simple and smooth.",
+    "price": 150,
+    "category": "Iced Coffee",
+    "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]},
+      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 3, "choices": [
+        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 },
+        { "id": "oat-milk", "label": "Oat Milk", "priceDelta": 30 }
+      ]}
+    ]
+  },
+  {
+    "id": "iced-mocha",
+    "name": "Iced Mocha",
+    "description": "Espresso, chocolate, and cold milk over ice.",
+    "price": 160,
+    "category": "Iced Coffee",
+    "imageUrl": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]}
+    ]
+  },
+  {
+    "id": "matcha-mango",
+    "name": "Matcha Mango",
+    "description": "Creamy matcha layered with sweet ripe mango.",
+    "price": 150,
+    "category": "Matcha Series",
+    "imageUrl": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "LUSH TROPICS",
+    "featured": true,
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]},
+      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 2, "choices": [
+        { "id": "pearls", "label": "Tapioca Pearls", "priceDelta": 20 },
+        { "id": "oat-milk", "label": "Oat Milk", "priceDelta": 30 }
+      ]}
+    ]
+  },
+  {
+    "id": "matcha-caramel-latte",
+    "name": "Matcha Caramel Latte",
+    "description": "Earthy matcha with a sweet golden caramel drizzle.",
+    "price": 150,
+    "category": "Matcha Series",
+    "imageUrl": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "GOLDEN DRIZZLE",
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]}
+    ]
+  },
+  {
+    "id": "matcha-cookie-latte",
+    "name": "Matcha Cookie Latte",
+    "description": "Matcha with crushed cookie crumble and cream.",
+    "price": 160,
+    "category": "Matcha Series",
+    "imageUrl": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "MATCHA CRUNCH",
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]}
+    ]
+  },
+  {
+    "id": "lychee-fizz",
+    "name": "Lychee Con Nata Fizz",
+    "description": "Sparkling lychee refresher with creamy nata.",
+    "price": 130,
+    "category": "Fruit Tea",
+    "imageUrl": "https://images.unsplash.com/photo-1437418747212-8d9709afab22?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "JOYFUL PUNCH",
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]},
+      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 2, "choices": [
+        { "id": "pearls", "label": "Tapioca Pearls", "priceDelta": 20 },
+        { "id": "nata", "label": "Extra Nata", "priceDelta": 15 }
+      ]}
+    ]
+  },
+  {
+    "id": "strawberry-smoothie",
+    "name": "Strawberry Smoothie",
+    "description": "Blended fresh strawberries and creamy yogurt.",
+    "price": 155,
+    "category": "Fruit Tea",
+    "imageUrl": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "CHEERFUL",
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 2, "choices": [
+        { "id": "pearls", "label": "Tapioca Pearls", "priceDelta": 20 }
+      ]}
+    ]
+  },
+  {
+    "id": "mango-fizz",
+    "name": "Mango Yakult Fizz",
+    "description": "Tangy-sweet mango with a fizzy yakult kick.",
+    "price": 140,
+    "category": "Fruit Tea",
+    "imageUrl": "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "SUNRUSH",
+    "options": [
+      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
+        { "id": "regular", "label": "Regular", "priceDelta": 0 },
+        { "id": "large", "label": "Large", "priceDelta": 25 }
+      ]},
+      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
+        { "id": "s100", "label": "100%", "priceDelta": 0 },
+        { "id": "s50", "label": "50%", "priceDelta": 0 },
+        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
+      ]}
+    ]
+  },
+  {
+    "id": "butter-croissant",
+    "name": "Butter Croissant",
+    "description": "Flaky, buttery, and baked fresh every morning.",
+    "price": 95,
+    "category": "Pastries",
+    "imageUrl": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=70",
+    "available": true
+  },
+  {
+    "id": "pain-au-chocolat",
+    "name": "Pain au Chocolat",
+    "description": "Buttery pastry wrapped around dark chocolate batons.",
+    "price": 110,
+    "category": "Pastries",
+    "imageUrl": "https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=600&q=70",
+    "available": true
+  },
+  {
+    "id": "cinnamon-roll",
+    "name": "Cinnamon Roll",
+    "description": "Soft swirl with cinnamon sugar and cream cheese glaze.",
+    "price": 120,
+    "category": "Pastries",
+    "imageUrl": "https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=600&q=70",
+    "available": true
+  },
+  {
+    "id": "choco-chip-cookie",
+    "name": "Chocolate Chip Cookie",
+    "description": "Soft-baked with melty Belgian chocolate chunks.",
+    "price": 70,
+    "category": "Pastries",
+    "imageUrl": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=70",
+    "available": true
+  },
+  {
+    "id": "ube-halaya-cake",
+    "name": "Classic Ube Halaya Cake",
+    "description": "Three layers of soft ube sponge and halaya cream.",
+    "price": 170,
+    "category": "Cakes",
+    "imageUrl": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "UBE CLASSIC",
+    "featured": true
+  },
+  {
+    "id": "blueberry-cheesecake",
+    "name": "Blueberry Cheesecake",
+    "description": "Creamy cheesecake with a bright blueberry compote.",
+    "price": 145,
+    "category": "Cakes",
+    "imageUrl": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "SWEET TREAT"
+  },
+  {
+    "id": "chocolate-cake",
+    "name": "Devil's Chocolate Cake",
+    "description": "Rich, fudgy chocolate cake with dark ganache.",
+    "price": 160,
+    "category": "Cakes",
+    "imageUrl": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=70",
+    "available": true
+  },
+  {
+    "id": "clubhouse-sandwich",
+    "name": "Clubhouse Sandwich",
+    "description": "Triple-decker with chicken, egg, and crispy bacon.",
+    "price": 220,
+    "category": "Meals",
+    "imageUrl": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=70",
+    "available": true
+  },
+  {
+    "id": "carbonara",
+    "name": "Creamy Carbonara",
+    "description": "Pasta in a rich cream and bacon sauce.",
+    "price": 240,
+    "category": "Meals",
+    "imageUrl": "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=600&q=70",
+    "available": true
+  },
+  {
+    "id": "chicken-pesto-pasta",
+    "name": "Chicken Pesto Pasta",
+    "description": "Basil pesto, grilled chicken, and parmesan.",
+    "price": 250,
+    "category": "Meals",
+    "imageUrl": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=600&q=70",
+    "available": true
+  },
+  {
+    "id": "fries",
+    "name": "Truffle Fries",
+    "description": "Hand-cut fries tossed in truffle oil and parmesan.",
+    "price": 150,
+    "category": "Meals",
+    "imageUrl": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=70",
+    "available": true
+  }
+]

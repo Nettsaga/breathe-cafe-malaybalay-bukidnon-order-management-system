@@ -1,0 +1,37 @@
+[
+  {
+    "id": "matcha-launch",
+    "title": "Mama Mo Matcha is here",
+    "subtitle": "Stone-ground matcha, three creamy new ways.",
+    "voucher": "MATCHA",
+    "emoji": "🍵",
+    "from": "#1f2e6e",
+    "to": "#3b6fe0"
+  },
+  {
+    "id": "cool-down",
+    "title": "Cool down & save 20%",
+    "subtitle": "On all iced drinks, dine-in today.",
+    "voucher": "CHILL20",
+    "emoji": "🧊",
+    "from": "#2b5fb8",
+    "to": "#4cc0e0"
+  },
+  {
+    "id": "pastry-pair",
+    "title": "Perfect pair",
+    "subtitle": "Any drink + a fresh pastry for less.",
+    "voucher": "PAIRUP",
+    "emoji": "🥐",
+    "from": "#3a2f6e",
+    "to": "#6a5acd"
+  },
+  {
+    "id": "refer",
+    "title": "Bring a friend",
+    "subtitle": "Share Breathe and you both get a treat.",
+    "emoji": "🤍",
+    "from": "#16204e",
+    "to": "#2f6fe0"
+  }
+]

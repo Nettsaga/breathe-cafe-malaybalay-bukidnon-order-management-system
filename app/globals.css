@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Breathe Cafe brand tokens — cool, clean "ZUS-style" palette.
+   White canvas, deep indigo/navy primary, tan/gold series labels, cobalt accent.
+   Products float on subtle gray halos (no cards). Swap hex to rebrand — every
+   component reads these variables, so the whole app re-themes here.
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+  --background: #ffffff; /* white canvas */
+  --surface: #ffffff; /* cards (cart/payment only) */
+  --surface-muted: #f1f3f8; /* chips / subtle fills */
+  --foreground: #1c2440; /* deep navy ink */
+  --muted: #8a90a2; /* secondary text */
+  --border: #e9ecf3;
+
+  --brand: #1f2e6e; /* deep indigo/navy primary */
+  --brand-dark: #16204e;
+  --brand-light: #eaeefb; /* pale indigo wash */
+  --accent: #3b6fe0; /* cobalt */
+  --series: #b08a5a; /* tan/gold series label */
+  --halo: #eef1f7; /* product halo glow */
+
+  --success: #2f9e6b;
+  --warning: #d99a2b;
+  --danger: #d65745;
+
+  --radius: 1.25rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-light: var(--brand-light);
+  --color-accent: var(--accent);
+  --color-series: var(--series);
+  --color-halo: var(--halo);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --radius-brand: var(--radius);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+/* ─── Shared component utilities (cool / floating) ───────────────────────── */
+@layer components {
+  /* Soft borderless card — used for grouping (cart, payment, kitchen). */
+  .card {
+    @apply bg-surface rounded-3xl shadow-[0_6px_24px_rgba(28,36,64,0.06)];
+  }
+  /* The "floating" halo behind a product image — the core look from the ref. */
+  .halo {
+    background: radial-gradient(closest-side, var(--halo), transparent 78%);
+  }
+  .btn-brand {
+    @apply bg-brand text-white font-semibold rounded-full px-6 py-3.5
+           transition-all active:scale-95 hover:bg-brand-dark disabled:opacity-50
+           disabled:active:scale-100 disabled:cursor-not-allowed;
+  }
+  .btn-ghost {
+    @apply bg-surface border border-border text-foreground font-medium rounded-full px-6 py-3.5
+           transition-all active:scale-95 hover:border-brand hover:text-brand;
+  }
+  .chip {
+    @apply px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all;
+  }
+  .chip-active {
+    @apply bg-brand text-white;
+  }
+  .chip-idle {
+    @apply bg-surface-muted text-muted hover:text-foreground;
+  }
+  .series-label {
+    @apply text-[11px] font-bold uppercase tracking-[0.12em] text-series;
+  }
+  /* Menu category sidebar item — clean, active = navy + left indigo bar. */
+  .cat-item {
+    @apply relative flex flex-col items-center gap-1 py-3 px-1 rounded-xl text-[11px]
+           font-semibold text-center leading-tight transition-all;
+  }
+  .cat-item-active {
+    @apply text-brand;
+  }
+  .cat-item-active::before {
+    content: "";
+    @apply absolute left-0 top-2 bottom-2 w-1 rounded-full bg-brand;
+  }
+  .cat-item-idle {
+    @apply text-muted hover:text-foreground;
+  }
+  /* Selectable option card (product detail). */
+  .opt-card {
+    @apply relative border rounded-2xl px-4 py-3 text-left transition-all cursor-pointer select-none;
+  }
+  .opt-card-on {
+    @apply border-brand bg-brand-light;
+  }
+  .opt-card-off {
+    @apply border-border bg-surface hover:border-brand/40;
+  }
+}
+
+/* Hide scrollbars on scroll rows / carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Horizontal snap carousel */
+.snap-x-row {
+  scroll-snap-type: x mandatory;
+}
+.snap-item {
+  scroll-snap-align: center;
+}
+
+/* ─── Motion: CSS fallback (used everywhere; framer-motion adds extra polish) ── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
+  }
+}
+
+/* ─── Print: only the kitchen ticket shows when printing ─────────────────── */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-ticket,
+  .print-ticket * {
+    visibility: visible;
+  }
+  .print-ticket {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80mm;
+    padding: 6mm 4mm;
+    color: #000;
+    background: #fff;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

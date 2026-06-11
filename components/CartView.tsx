@@ -27,7 +27,7 @@ export default function CartView({ table }: { table: Table }) {
         <div className="max-w-md lg:max-w-4xl mx-auto w-full flex items-center gap-3">
           <Link
             href={menuHref}
-            className="w-10 h-10 rounded-full bg-surface-muted flex items-center justify-center"
+            className="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center hover:bg-brand-dark active:scale-95 transition"
             aria-label="Back to menu"
           >
             <ChevronLeft className="w-5 h-5" />

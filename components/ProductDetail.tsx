@@ -67,7 +67,7 @@ export default function ProductDetail({
       <div className="lg:hidden sticky top-0 z-10 px-4 py-3 flex items-center gap-3 bg-background/95 backdrop-blur">
         <button
           onClick={() => router.back()}
-          className="w-10 h-10 rounded-full bg-surface-muted flex items-center justify-center"
+          className="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center hover:bg-brand-dark active:scale-95 transition"
           aria-label="Back"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -81,7 +81,7 @@ export default function ProductDetail({
         <div className="lg:flex lg:flex-col">
           <button
             onClick={() => router.back()}
-            className="group hidden lg:inline-flex items-center gap-1.5 self-start rounded-full bg-brand-light text-brand font-semibold text-sm px-5 py-2.5 mb-6 hover:bg-brand hover:text-white active:scale-95 transition-all"
+            className="group hidden lg:inline-flex items-center gap-1.5 self-start rounded-full bg-brand text-white font-semibold text-sm px-5 py-2.5 mb-6 hover:bg-brand-dark active:scale-95 transition-all"
           >
             <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
             Back to menu

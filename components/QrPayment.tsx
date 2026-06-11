@@ -264,10 +264,10 @@ export default function QrPayment({ order }: { order: Order }) {
       {/* Back to cart — lets the customer step out of payment to edit their order */}
       <button
         onClick={() => router.push(`/t/${order.tableId}/cart`)}
-        className="fixed top-4 left-4 lg:top-6 lg:left-6 z-10 flex items-center gap-1 bg-surface-muted text-foreground rounded-full pl-2 pr-4 py-2 text-sm font-medium shadow-sm hover:bg-border active:scale-95 transition"
+        className="group fixed top-4 left-4 lg:top-6 lg:left-6 z-10 inline-flex items-center gap-1.5 bg-brand text-white font-semibold text-sm rounded-full px-5 py-2.5 hover:bg-brand-dark active:scale-95 transition-all"
         aria-label="Back to cart"
       >
-        <ChevronLeft className="w-5 h-5" />
+        <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
         Back
       </button>
 

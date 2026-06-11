@@ -41,12 +41,18 @@ export default async function TableHubPage({
 
   return (
     <div className="flex-1 flex flex-col bg-background lg:pl-24 xl:pl-28">
-      {/* Sticky greeting header */}
-      <header className="sticky top-0 z-20 bg-brand text-white px-5 pt-8 pb-5 lg:px-10 lg:pt-10 lg:pb-8">
-        <p className="text-white/70 text-sm">you&apos;re at {table.label}</p>
-        <h1 className="text-2xl lg:text-4xl font-semibold leading-tight">
-          Good to see you :&gt;
-        </h1>
+      {/* Greeting — soft brand-light band on mobile, clean white on desktop */}
+      <header className="bg-brand-light lg:bg-transparent px-5 lg:px-8 pt-8 lg:pt-10 pb-5 lg:pb-1">
+        <div className="kiosk-container px-0">
+          <h1 className="text-2xl lg:text-4xl font-semibold leading-tight text-foreground">
+            Good to see you :&gt;
+          </h1>
+          <p className="text-muted text-sm mt-1">
+            You&apos;re at{" "}
+            <span className="font-semibold text-brand">{table.label}</span> · Breathe
+            Cafe
+          </p>
+        </div>
       </header>
 
       <main className="flex-1 kiosk-container px-5 lg:px-8 py-5 lg:py-8 pb-28">

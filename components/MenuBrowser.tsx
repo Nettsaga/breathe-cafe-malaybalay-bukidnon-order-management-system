@@ -178,10 +178,12 @@ export default function MenuBrowser({
         variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
         animate={headerHidden ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="lg:hidden sticky top-0 z-20 bg-brand text-white px-5 pt-6 pb-4"
+        className="lg:hidden sticky top-0 z-20 bg-background border-b border-border text-foreground px-5 pt-6 pb-4"
       >
-        <h1 className="text-xl font-semibold">Menu</h1>
-        <p className="text-white/70 text-sm">{table.label} · Dine-in</p>
+        <h1 className="text-2xl font-semibold leading-tight text-foreground">Menu</h1>
+        <p className="text-muted text-sm mt-1">
+          <span className="font-semibold text-brand">{table.label}</span> · Dine-in
+        </p>
       </motion.header>
 
       {/* Floating search button — mobile only (desktop searches via the panel bar) */}

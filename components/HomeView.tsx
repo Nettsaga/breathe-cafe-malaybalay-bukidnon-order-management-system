@@ -64,43 +64,50 @@ export default function HomeView({
 
   return (
     <div className="flex-1 flex flex-col bg-background">
-      <main className="flex-1 max-w-md mx-auto w-full px-5 pt-8 pb-6">
-        {/* Greeting */}
+      <main className="flex-1 max-w-md mx-auto w-full px-5 pb-6">
+        {/* Pinned header: greeting + search (does not scroll) */}
+        <div className="sticky top-0 z-20 bg-background/90 backdrop-blur -mx-5 px-5 pt-8 pb-3">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0}
+            className="flex items-center justify-between mb-3"
+          >
+            <div>
+              <p className="text-2xl font-semibold leading-tight text-foreground">
+                Hello, friend
+              </p>
+              <p className="text-muted text-sm mt-1">
+                You&apos;re at{" "}
+                <span className="font-semibold text-brand">{table.label}</span> ·
+                Breathe Cafe
+              </p>
+            </div>
+            <div className="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center">
+              <span className="text-xl">🌿</span>
+            </div>
+          </motion.div>
+
+          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={1}>
+            <Link
+              href={`${menuHref}?q=`}
+              className="flex items-center gap-2 bg-surface-muted rounded-full px-4 py-3 text-muted"
+            >
+              <Search className="w-5 h-5 -scale-x-100" />
+              <span className="text-sm">Search drinks, pastries…</span>
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Ads carousel */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          custom={0}
-          className="flex items-center justify-between mb-4"
+          custom={2}
+          className="mt-5"
         >
-          <div>
-            <p className="text-2xl font-semibold leading-tight text-foreground">
-              Hello, friend
-            </p>
-            <p className="text-muted text-sm mt-1">
-              You&apos;re at{" "}
-              <span className="font-semibold text-brand">{table.label}</span> ·
-              Breathe Cafe
-            </p>
-          </div>
-          <div className="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center">
-            <span className="text-xl">🌿</span>
-          </div>
-        </motion.div>
-
-        {/* Search bar (links into the menu search) */}
-        <motion.div variants={fadeUp} initial="hidden" animate="show" custom={1}>
-          <Link
-            href={`${menuHref}?q=`}
-            className="flex items-center gap-2 bg-surface-muted rounded-full px-4 py-3 text-muted mb-5"
-          >
-            <Search className="w-5 h-5 -scale-x-100" />
-            <span className="text-sm">Search drinks, pastries…</span>
-          </Link>
-        </motion.div>
-
-        {/* Ads carousel */}
-        <motion.div variants={fadeUp} initial="hidden" animate="show" custom={2}>
           <AdCarousel promos={promos} />
         </motion.div>
 

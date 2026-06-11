@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, ShoppingBag, Plus, Minus } from "lucide-react";
+import { ChevronLeft, ShoppingBag, Plus, Minus, Trash2 } from "lucide-react";
 import { useCart } from "@/lib/store";
 import { peso } from "@/lib/format";
 import type { Table } from "@/lib/types";
@@ -12,7 +12,7 @@ import BottomNav from "./BottomNav";
 
 export default function CartView({ table }: { table: Table }) {
   const router = useRouter();
-  const { setTable, lines, inc, dec, total } = useCart();
+  const { setTable, lines, inc, dec, total, clear } = useCart();
   const [mounted, setMounted] = useState(false);
   const [placing, setPlacing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -55,7 +55,7 @@ export default function CartView({ table }: { table: Table }) {
 
   return (
     <div className="flex-1 flex flex-col bg-background">
-      <header className="px-5 pt-6 pb-3 flex items-center gap-3">
+      <header className="sticky top-0 z-20 bg-background/90 backdrop-blur px-5 pt-6 pb-3 flex items-center gap-3">
         <Link
           href={menuHref}
           className="w-10 h-10 rounded-full bg-surface-muted flex items-center justify-center"
@@ -63,13 +63,22 @@ export default function CartView({ table }: { table: Table }) {
         >
           <ChevronLeft className="w-5 h-5" />
         </Link>
-        <div>
+        <div className="flex-1">
           <h1 className="text-xl font-semibold">My Order</h1>
           <p className="text-muted text-sm">{table.label} · Dine-in</p>
         </div>
+        {lines.length > 0 && (
+          <button
+            onClick={clear}
+            className="flex items-center gap-1 text-sm font-medium text-danger px-3 py-2 rounded-full hover:bg-danger/10 active:scale-95 transition"
+          >
+            <Trash2 className="w-4 h-4" />
+            Clear
+          </button>
+        )}
       </header>
 
-      <main className="flex-1 overflow-y-auto px-5 pb-44 max-w-md mx-auto w-full">
+      <main className="flex-1 px-5 pb-44 max-w-md mx-auto w-full">
         {lines.length === 0 ? (
           <div className="flex flex-col items-center py-24 text-muted">
             <ShoppingBag className="w-12 h-12 mb-3 text-border" />

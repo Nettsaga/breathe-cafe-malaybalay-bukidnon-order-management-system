@@ -2,27 +2,45 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { peso } from "@/lib/format";
-import type { Order, OrderStatus } from "@/lib/types";
+import { motion, AnimatePresence } from "framer-motion";
+import { Coffee, Check } from "lucide-react";
+import { peso, shortTime } from "@/lib/format";
+import type { Order } from "@/lib/types";
 import type { OrderEvent } from "@/lib/events";
 
 // Customer-facing order tracker. Subscribes to the same SSE stream the kitchen
-// uses, so the status updates live as the barista advances the order.
+// uses; while the order is in progress it shows a continuous loader cycling
+// through playful "we're on it" phrases.
 
-const STEPS: { status: OrderStatus; label: string; emoji: string; sub: string }[] = [
-  { status: "queued", label: "Order received", emoji: "🧾", sub: "Sent to the kitchen" },
-  { status: "preparing", label: "Preparing", emoji: "👨‍🍳", sub: "We're making it now" },
-  { status: "ready", label: "Ready", emoji: "🔔", sub: "Ready for serving" },
-  { status: "served", label: "Served", emoji: "✅", sub: "Enjoy! 🤍" },
+const MAKING_PHRASES = [
+  "Grinding the beans…",
+  "Pulling a fresh shot…",
+  "Steaming the milk just right…",
+  "Swirling the foam…",
+  "Coaxing out the crema…",
+  "Whisking the matcha…",
+  "Baking something good…",
+  "Warming the oven…",
+  "Tempering the chocolate…",
+  "Stacking the ice nice and high…",
+  "Plating it pretty…",
+  "Counting the sprinkles…",
+  "Adding a little love…",
+  "Chasing the perfect pour…",
+  "Quality-control sip in progress…",
+  "Almost there, promise…",
 ];
 
-function stepIndex(status: OrderStatus): number {
-  const i = STEPS.findIndex((s) => s.status === status);
-  return i === -1 ? 0 : i; // "pending" maps to first step visually
-}
+const READY_PHRASES = [
+  "Ready when you are.",
+  "Fresh off the bar.",
+  "Come and get it.",
+  "Your table is calling.",
+];
 
 export default function OrderStatusView({ initial }: { initial: Order }) {
   const [order, setOrder] = useState<Order>(initial);
+  const [tick, setTick] = useState(0);
 
   useEffect(() => {
     const es = new EventSource("/api/orders/stream");
@@ -43,82 +61,161 @@ export default function OrderStatusView({ initial }: { initial: Order }) {
     return () => es.close();
   }, [initial.id]);
 
-  const current = stepIndex(order.status);
+  const isCompleted = order.status === "completed";
+  const isReady = order.status === "ready";
+
+  // Continuously cycle the playful phrases while the order is in progress.
+  useEffect(() => {
+    if (isCompleted) return;
+    const id = setInterval(() => setTick((t) => t + 1), 2400);
+    return () => clearInterval(id);
+  }, [isCompleted]);
+
+  const pool = isReady ? READY_PHRASES : MAKING_PHRASES;
+  const phrase = isCompleted
+    ? "Order complete — enjoy :>"
+    : pool[tick % pool.length];
 
   return (
     <div className="flex-1 flex flex-col bg-background">
       <header className="sticky top-0 z-20 bg-background/90 backdrop-blur px-5 pt-8 pb-4 text-center">
         <p className="text-muted text-sm">{order.tableLabel}</p>
         <h1 className="text-xl font-semibold">Order {order.id}</h1>
-        <span className="inline-block mt-2 chip chip-idle">
+        <span className="inline-block mt-2 chip bg-success/15 text-success">
           {order.paymentStatus === "paid" ? "Paid · GCash" : order.paymentStatus}
         </span>
       </header>
 
-      <main className="flex-1 px-5 py-4 max-w-md mx-auto w-full">
-        {/* Status timeline */}
-        <div className="card p-5 mb-5">
-          <div className="space-y-1">
-            {STEPS.map((step, i) => {
-              const done = i < current;
-              const active = i === current;
-              return (
-                <div key={step.status} className="flex items-start gap-4">
-                  {/* rail */}
-                  <div className="flex flex-col items-center">
-                    <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all ${
-                        done || active
-                          ? "bg-brand text-white"
-                          : "bg-surface-muted text-muted"
-                      } ${active ? "ring-4 ring-brand-light" : ""}`}
-                    >
-                      {step.emoji}
-                    </div>
-                    {i < STEPS.length - 1 && (
-                      <div
-                        className={`w-0.5 h-8 ${done ? "bg-brand" : "bg-border"}`}
-                      />
-                    )}
-                  </div>
-                  <div className={`pt-1.5 ${!done && !active ? "opacity-40" : ""}`}>
-                    <p className="font-bold leading-tight">{step.label}</p>
-                    <p className="text-muted text-xs">{step.sub}</p>
-                  </div>
+      <main className="flex-1 px-5 py-5 max-w-md mx-auto w-full">
+        {/* Continuous loader + cycling phrases */}
+        <div className="card p-7 mb-5 flex flex-col items-center text-center">
+          <div className="relative w-28 h-28 mb-5">
+            {isCompleted ? (
+              <motion.div
+                initial={{ scale: 0.7, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                className="w-28 h-28 rounded-full bg-success text-white flex items-center justify-center"
+              >
+                <Check className="w-12 h-12" strokeWidth={2.5} />
+              </motion.div>
+            ) : (
+              <>
+                {/* spinning ring */}
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background:
+                      "conic-gradient(var(--brand), color-mix(in srgb, var(--brand) 15%, transparent) 60%, transparent 78%)",
+                  }}
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 1.4, ease: "linear" }}
+                />
+                <div className="absolute inset-[7px] rounded-full bg-surface flex items-center justify-center">
+                  <motion.span
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+                  >
+                    <Coffee className="w-10 h-10 text-brand" strokeWidth={1.8} />
+                  </motion.span>
                 </div>
-              );
-            })}
+              </>
+            )}
           </div>
+
+          {/* status caption */}
+          <span
+            className={`chip text-xs mb-2 capitalize ${
+              isReady ? "bg-success/15 text-success" : "chip-idle"
+            }`}
+          >
+            {order.status === "pending" ? "In the queue" : order.status}
+          </span>
+
+          {/* cycling phrase */}
+          <div className="h-7 flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={phrase}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3 }}
+                className="text-lg font-semibold"
+              >
+                {phrase}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+          <p className="text-muted text-xs mt-1">
+            {isCompleted
+              ? "Thanks for ordering with us."
+              : "Hang tight — we'll keep this updated live."}
+          </p>
         </div>
 
-        {/* Order summary */}
-        <div className="card p-5">
-          <h2 className="font-bold mb-3">Order summary</h2>
+        {/* Receipt */}
+        <div className="receipt shadow-[0_6px_24px_rgba(28,36,64,0.08)] px-6 pt-6 pb-7 font-mono text-foreground">
+          <div className="text-center mb-3">
+            <p className="font-semibold tracking-[0.15em] text-sm">BREATHE CAFE</p>
+            <p className="text-[11px] text-muted">Malaybalay, Bukidnon</p>
+          </div>
+
+          <div className="border-t border-dashed border-border/80 my-3" />
+
+          <div className="text-xs space-y-1">
+            <div className="flex justify-between">
+              <span className="text-muted">{order.tableLabel}</span>
+              <span className="text-muted">{shortTime(order.createdAt)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted">Order</span>
+              <span>{order.id}</span>
+            </div>
+          </div>
+
+          <div className="border-t border-dashed border-border/80 my-3" />
+
           <div className="space-y-2">
             {order.items.map((it, i) => (
-              <div
-                key={`${it.menuItemId}-${i}`}
-                className="flex justify-between text-sm gap-3"
-              >
-                <span className="text-muted min-w-0">
-                  {it.qty}× {it.name}
-                  {it.optionsLabel && (
-                    <span className="block text-xs text-muted/70">
-                      {it.optionsLabel}
-                    </span>
-                  )}
-                </span>
-                <span className="whitespace-nowrap">{peso(it.price * it.qty)}</span>
+              <div key={`${it.menuItemId}-${i}`} className="text-[13px]">
+                <div className="flex justify-between gap-3">
+                  <span className="min-w-0">
+                    <span className="text-muted">{it.qty}×</span> {it.name}
+                  </span>
+                  <span className="whitespace-nowrap">{peso(it.price * it.qty)}</span>
+                </div>
+                {it.optionsLabel && (
+                  <p className="text-[11px] text-muted pl-5">{it.optionsLabel}</p>
+                )}
               </div>
             ))}
           </div>
-          <div className="flex justify-between font-bold text-lg pt-3 mt-3 border-t border-border">
-            <span>Total</span>
-            <span className="text-brand">{peso(order.total)}</span>
+
+          <div className="border-t border-dashed border-border/80 my-3" />
+
+          <div className="flex justify-between font-semibold text-sm">
+            <span>TOTAL</span>
+            <span>{peso(order.total)}</span>
           </div>
+
+          <div className="border-t border-dashed border-border/80 my-3" />
+
+          <p className="text-center text-[11px] text-muted">
+            {order.paymentStatus === "paid" ? "PAID · GCash · QR Ph" : "UNPAID"}
+          </p>
+          {order.paymentRef && (
+            <p className="text-center text-[11px] text-muted">
+              Ref: {order.paymentRef}
+            </p>
+          )}
+          <p className="text-center text-xs mt-3">Salamat — see you again :&gt;</p>
         </div>
 
-        <Link href={`/t/${order.tableId}/menu`} className="btn-ghost w-full mt-5 block text-center">
+        <Link
+          href={`/t/${order.tableId}/menu`}
+          className="btn-ghost w-full mt-5 block text-center"
+        >
           Order more
         </Link>
       </main>

@@ -22,7 +22,7 @@ export interface MenuItem {
   price: number; // PHP (base)
   category: string;
   imageUrl?: string;
-  available: boolean;
+  available: boolean; // false → shown on the menu but greyed as "Sold out"
   seriesLabel?: string; // colored caps label above the name, e.g. "BEST SELLER"
   featured?: boolean; // surfaced on the Home screen
   options?: OptionGroup[];
@@ -53,11 +53,10 @@ export interface OrderItem {
 }
 
 export type OrderStatus =
-  | "pending" // created, awaiting payment
-  | "queued" // paid, sent to kitchen
-  | "preparing"
-  | "ready"
-  | "served";
+  | "pending" // received & paid — waiting in the kitchen queue
+  | "preparing" // barista is making it
+  | "ready" // ready for pickup / serving
+  | "completed"; // order complete
 
 export type PaymentStatus = "unpaid" | "paid" | "failed";
 
@@ -75,13 +74,12 @@ export interface Order {
 }
 
 // Active statuses shown on the kitchen board, in display order.
-export const KITCHEN_STATUSES: OrderStatus[] = ["queued", "preparing", "ready"];
+export const KITCHEN_STATUSES: OrderStatus[] = ["pending", "preparing", "ready"];
 
 // What the next status button advances to.
 export const NEXT_STATUS: Record<OrderStatus, OrderStatus | null> = {
-  pending: "queued",
-  queued: "preparing",
+  pending: "preparing",
   preparing: "ready",
-  ready: "served",
-  served: null,
+  ready: "completed",
+  completed: null,
 };

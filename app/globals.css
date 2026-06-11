@@ -130,6 +130,20 @@ body {
   scrollbar-width: none;
 }
 
+/* Paper-receipt card with a torn zigzag bottom edge */
+.receipt {
+  --zig: 9px;
+  background: var(--surface);
+  -webkit-mask:
+    linear-gradient(#000 0 0) top / 100% calc(100% - var(--zig)) no-repeat,
+    conic-gradient(from -45deg at bottom, #0000 25%, #000 0) bottom / calc(2 * var(--zig))
+      var(--zig) repeat-x;
+  mask:
+    linear-gradient(#000 0 0) top / 100% calc(100% - var(--zig)) no-repeat,
+    conic-gradient(from -45deg at bottom, #0000 25%, #000 0) bottom / calc(2 * var(--zig))
+      var(--zig) repeat-x;
+}
+
 /* Horizontal snap carousel */
 .snap-x-row {
   scroll-snap-type: x mandatory;

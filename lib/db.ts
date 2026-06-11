@@ -54,6 +54,32 @@ export function getMenu(): Promise<MenuItem[]> {
   return readJson<MenuItem[]>(FILES.menu, []);
 }
 
+// Slugify a name into a stable id, de-duplicating against the existing menu.
+function uniqueMenuId(name: string, existing: MenuItem[]): string {
+  const base =
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "item";
+  let id = base;
+  let n = 2;
+  const taken = new Set(existing.map((m) => m.id));
+  while (taken.has(id)) id = `${base}-${n++}`;
+  return id;
+}
+
+export async function createMenuItem(
+  input: Omit<MenuItem, "id">
+): Promise<MenuItem> {
+  return serialize(FILES.menu, async () => {
+    const menu = await readJson<MenuItem[]>(FILES.menu, []);
+    const item: MenuItem = { ...input, id: uniqueMenuId(input.name, menu) };
+    menu.push(item);
+    await writeJson(FILES.menu, menu);
+    return item;
+  });
+}
+
 export async function updateMenuItem(
   id: string,
   patch: Partial<Pick<MenuItem, "price" | "available" | "imageUrl">>

@@ -565,7 +565,7 @@
     "price": 160,
     "category": "Iced Coffee",
     "imageUrl": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=600&q=70",
-    "available": true,
+    "available": false,
     "options": [
       {
         "id": "size",
@@ -617,7 +617,7 @@
     "price": 150,
     "category": "Matcha Series",
     "imageUrl": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=70",
-    "available": true,
+    "available": false,
     "seriesLabel": "LUSH TROPICS",
     "featured": true,
     "options": [
@@ -689,7 +689,7 @@
     "price": 150,
     "category": "Matcha Series",
     "imageUrl": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=70",
-    "available": true,
+    "available": false,
     "seriesLabel": "GOLDEN DRIZZLE",
     "options": [
       {

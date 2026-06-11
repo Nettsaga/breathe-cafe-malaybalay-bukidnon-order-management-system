@@ -7,10 +7,9 @@ export const dynamic = "force-dynamic";
 
 const ORDER_STATUSES: OrderStatus[] = [
   "pending",
-  "queued",
   "preparing",
   "ready",
-  "served",
+  "completed",
 ];
 const PAYMENT_STATUSES: PaymentStatus[] = ["unpaid", "paid", "failed"];
 

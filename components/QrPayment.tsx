@@ -8,6 +8,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/store";
 import { peso } from "@/lib/format";
@@ -44,6 +45,12 @@ export default function QrPayment({ order }: { order: Order }) {
   const router = useRouter();
   const clearCart = useCart((s) => s.clear);
 
+  // DEMO: PayMongo is charged a flat ₱1 no matter the order total, so the QR
+  // flow can be tested cheaply. The order's real total is unchanged everywhere
+  // else (cart, kitchen, receipts). Remove this override to charge the real total.
+  const DEMO_CHARGE_PHP = 1;
+  const chargeAmount = DEMO_CHARGE_PHP;
+
   const totalPrice = order.total;
   const description = `${order.id} · ${order.tableLabel}`;
 
@@ -66,7 +73,7 @@ export default function QrPayment({ order }: { order: Order }) {
         const { ok, data } = await fetchJSON("/api/paymongo/create-source", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amountPhp: totalPrice, description }),
+          body: JSON.stringify({ amountPhp: chargeAmount, description }),
         });
         if (!ok) throw new Error((data.error as string) ?? "Failed to create QR code");
         if (cancelled) return;
@@ -100,13 +107,13 @@ export default function QrPayment({ order }: { order: Order }) {
       if (!verify.ok)
         throw new Error((verify.data.error as string) ?? "Failed to confirm payment");
 
-      // Flip the order to paid/queued → emits SSE to the kitchen.
+      // Mark paid → the order (status "pending") now appears in the kitchen
+      // queue via SSE. Kitchen advances it: pending → preparing → ready → completed.
       const patch = await fetchJSON(`/api/orders/${order.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           paymentStatus: "paid",
-          status: "queued",
           paymentRef: sid,
         }),
       });
@@ -156,23 +163,52 @@ export default function QrPayment({ order }: { order: Order }) {
   if (status === "paid") {
     return (
       <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-        <div className="w-20 h-20 rounded-full bg-brand-light flex items-center justify-center mb-6">
-          <svg
-            className="w-10 h-10 text-brand"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
+        {/* Animated draw-in circle + checkmark */}
+        <motion.div
+          initial={{ scale: 0.7, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 300, damping: 18 }}
+          className="relative w-24 h-24 mb-6"
+        >
+          <span className="absolute inset-0 rounded-full bg-success/15 animate-ping" />
+          <svg viewBox="0 0 52 52" className="relative w-24 h-24">
+            <motion.circle
+              cx="26"
+              cy="26"
+              r="24"
+              fill="none"
+              stroke="var(--success)"
+              strokeWidth="3"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.55, ease: "easeInOut" }}
+            />
+            <motion.path
+              d="M16 27 l7 7 l14 -16"
+              fill="none"
+              stroke="var(--success)"
+              strokeWidth="4"
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2.5}
-              d="M5 13l4 4L19 7"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ delay: 0.45, duration: 0.4, ease: "easeOut" }}
             />
           </svg>
-        </div>
-        <h2 className="text-2xl font-bold mb-1">Payment Successful!</h2>
-        <p className="text-muted">Sending your order to the kitchen…</p>
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="text-2xl font-semibold mb-1"
+        >
+          Payment received
+        </motion.h2>
+        <p className="text-muted flex items-center gap-2">
+          <Spinner />
+          Sending your order to the kitchen…
+        </p>
       </div>
     );
   }
@@ -282,7 +318,10 @@ export default function QrPayment({ order }: { order: Order }) {
         <p className="text-muted text-xs uppercase tracking-wider mb-1">
           Amount Due
         </p>
-        <p className="text-3xl font-bold text-brand">{peso(totalPrice)}</p>
+        <p className="text-3xl font-bold text-brand">{peso(chargeAmount)}</p>
+        <p className="text-muted text-xs mt-1">
+          Demo mode · order total {peso(totalPrice)}
+        </p>
       </div>
 
       <div className="flex gap-2 items-center mb-2">

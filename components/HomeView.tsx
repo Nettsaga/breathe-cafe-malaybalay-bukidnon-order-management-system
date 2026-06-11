@@ -84,7 +84,7 @@ export default function HomeView({
               </p>
             </div>
             <div className="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center">
-              <span className="text-xl">🌿</span>
+              <Coffee className="w-6 h-6 text-brand" strokeWidth={1.8} />
             </div>
           </motion.div>
 

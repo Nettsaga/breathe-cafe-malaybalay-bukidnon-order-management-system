@@ -18,6 +18,7 @@ import {
   Bean,
   Coffee,
   CupSoda,
+  Leaf,
   Cherry,
   Croissant,
   CakeSlice,
@@ -33,7 +34,7 @@ const CATEGORY_ICON: Record<string, LucideIcon> = {
   Signature: Bean, // coffee bean — premium house line
   "Hot Coffee": Coffee,
   "Iced Coffee": CupSoda,
-  "Matcha Series": Coffee,
+  "Matcha Series": Leaf,
   "Fruit Tea": Cherry,
   Pastries: Croissant,
   Cakes: CakeSlice,

@@ -82,12 +82,27 @@ export default function MenuBrowser({
   );
   const [query, setQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(searchFocused);
+  const [hideHeader, setHideHeader] = useState(false);
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   useEffect(() => {
     if (searchOpen) searchRef.current?.focus();
   }, [searchOpen]);
+
+  // Direction-aware header: transparent/hidden on scroll down, visible on scroll up.
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y < 12) setHideHeader(false);
+      else if (y > lastY + 5) setHideHeader(true); // scrolling down
+      else if (y < lastY - 5) setHideHeader(false); // scrolling up
+      lastY = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   function toggleSearch() {
     setSearchOpen((open) => {
@@ -107,6 +122,9 @@ export default function MenuBrowser({
 
   const cartCount = mounted ? count() : 0;
   const cartTotal = mounted ? total() : 0;
+
+  // Header is solid (navy) at top / scrolling up / searching; transparent on scroll down.
+  const headerSolid = !hideHeader || searchOpen;
 
   // Scroll-spy on the viewport: highlight the section sitting under the header.
   useEffect(() => {
@@ -147,15 +165,21 @@ export default function MenuBrowser({
 
   return (
     <div className="flex-1 flex flex-col bg-background min-h-0">
-      {/* Header — title with a sleek search icon beside it */}
-      <header className="sticky top-0 z-20 bg-background/95 backdrop-blur px-5 pt-6 pb-3">
+      {/* Header — navy when solid; transparent on scroll down (title + search stay). */}
+      <header
+        className={`sticky top-0 z-20 px-5 pt-6 pb-3 transition-colors duration-300 ${
+          headerSolid ? "bg-brand text-white" : "bg-transparent text-foreground"
+        }`}
+      >
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-semibold">Menu</h1>
           <button
             onClick={toggleSearch}
             aria-label={searchOpen ? "Close search" : "Search"}
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors active:scale-90 ${
-              searchOpen ? "bg-brand text-white" : "bg-surface-muted text-foreground"
+              headerSolid
+                ? "bg-white/15 text-white"
+                : "bg-surface-muted text-foreground"
             }`}
           >
             {searchOpen ? (

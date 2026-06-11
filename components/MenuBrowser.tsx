@@ -4,7 +4,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion";
 import {
   Search,
   X,
@@ -105,6 +110,22 @@ export default function MenuBrowser({
   const cartCount = mounted ? count() : 0;
   const cartTotal = mounted ? total() : 0;
 
+  // Auto-hiding "Headroom" header: hide on scroll down, reveal on scroll up.
+  // Direction is read from the scroll motion value, so it never re-renders on
+  // every scroll frame — only when the hidden/shown state actually flips.
+  const { scrollY } = useScroll();
+  const [headerHidden, setHeaderHidden] = useState(false);
+  const lastYRef = useRef(0);
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const last = lastYRef.current;
+    if (searchOpen || y < 80) {
+      setHeaderHidden(false); // always show near the top / while searching
+    } else if (Math.abs(y - last) > 6) {
+      setHeaderHidden(y > last); // down → hide, up → show (with tolerance)
+    }
+    lastYRef.current = y;
+  });
+
   // Scroll-spy on the viewport: highlight the section sitting under the header.
   useEffect(() => {
     if (searching) return;
@@ -144,11 +165,16 @@ export default function MenuBrowser({
 
   return (
     <div className="flex-1 flex flex-col bg-background min-h-0">
-      {/* Navy header — sticky, always visible (does not disappear) */}
-      <header className="sticky top-0 z-20 bg-brand text-white px-5 pt-6 pb-4">
+      {/* Navy header — auto-hides on scroll down, reveals on scroll up */}
+      <motion.header
+        variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
+        animate={headerHidden ? "hidden" : "visible"}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        className="sticky top-0 z-20 bg-brand text-white px-5 pt-6 pb-4"
+      >
         <h1 className="text-xl font-semibold">Menu</h1>
         <p className="text-white/70 text-sm">{table.label} · Dine-in</p>
-      </header>
+      </motion.header>
 
       {/* Floating search button — stays pinned on screen while you scroll */}
       <button
@@ -215,8 +241,12 @@ export default function MenuBrowser({
         </main>
       ) : (
         <div className="flex items-start">
-          {/* Category sidebar = sticky scroll-spy + jump nav (under the header) */}
-          <aside className="sticky top-[92px] self-start w-[84px] shrink-0 max-h-[calc(100vh-92px-64px)] overflow-y-auto no-scrollbar pt-2 pb-2 z-10 bg-background">
+          {/* Category sidebar = sticky scroll-spy + jump nav; rises when header hides */}
+          <aside
+            className={`sticky self-start w-[84px] shrink-0 max-h-[calc(100vh-80px)] overflow-y-auto no-scrollbar pt-2 pb-2 z-10 bg-background transition-[top] duration-300 ${
+              headerHidden ? "top-2" : "top-[92px]"
+            }`}
+          >
             {categories.map((cat) => {
               const Icon = CATEGORY_ICON[cat] ?? Coffee;
               return (

@@ -182,10 +182,9 @@ export default function CartView({ table }: { table: Table }) {
           <button
             onClick={placeOrder}
             disabled={placing}
-            className="btn-brand max-w-md mx-auto flex items-center justify-between shadow-xl"
+            className="btn-brand w-full max-w-md mx-auto flex items-center justify-center shadow-xl"
           >
-            <span>{placing ? "Placing order…" : "Place order & pay"}</span>
-            <span>{peso(grandTotal)}</span>
+            {placing ? "Placing order…" : "Place Order"}
           </button>
         </div>
       )}

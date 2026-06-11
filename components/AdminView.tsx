@@ -2,7 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { Soup, CircleCheck, Wallet, Receipt, type LucideIcon } from "lucide-react";
+import {
+  Soup,
+  CircleCheck,
+  Wallet,
+  Receipt,
+  Coffee,
+  type LucideIcon,
+} from "lucide-react";
 import { peso, shortTime } from "@/lib/format";
 import type { MenuItem, Order, OrderStatus, Table } from "@/lib/types";
 import type { OrderEvent } from "@/lib/events";
@@ -28,19 +35,30 @@ export default function AdminView({
 
   return (
     <div className="flex-1 flex flex-col bg-background">
-      <header className="sticky top-0 z-20 bg-surface border-b border-border px-6 py-4 lg:px-10 lg:py-5">
-        <h1 className="text-xl lg:text-2xl font-bold text-brand">Breathe Admin</h1>
-        <p className="text-muted text-sm">Orders, menu &amp; table QR codes</p>
-        <div className="flex gap-2 mt-4">
-          {tabs.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setTab(t.id)}
-              className={`chip ${tab === t.id ? "chip-active" : "chip-idle"}`}
-            >
-              {t.label}
-            </button>
-          ))}
+      <header className="sticky top-0 z-20 bg-surface/90 backdrop-blur border-b border-border px-5 lg:px-8 py-4 lg:py-5">
+        <div className="max-w-3xl lg:max-w-5xl mx-auto w-full">
+          <div className="flex items-center gap-3">
+            <span className="w-11 h-11 lg:w-12 lg:h-12 rounded-2xl bg-brand text-white flex items-center justify-center shrink-0">
+              <Coffee className="w-6 h-6" strokeWidth={1.8} />
+            </span>
+            <div>
+              <h1 className="text-xl lg:text-2xl font-bold text-brand leading-tight">
+                Breathe Admin
+              </h1>
+              <p className="text-muted text-sm">Orders, menu &amp; table QR codes</p>
+            </div>
+          </div>
+          <div className="flex gap-2 mt-4">
+            {tabs.map((t) => (
+              <button
+                key={t.id}
+                onClick={() => setTab(t.id)}
+                className={`chip ${tab === t.id ? "chip-active" : "chip-idle"}`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
         </div>
       </header>
 
@@ -72,6 +90,7 @@ const STATUS_LABEL: Record<OrderStatus, string> = {
 function OrdersDashboard({ initialOrders }: { initialOrders: Order[] }) {
   const [orders, setOrders] = useState(initialOrders);
   const [busy, setBusy] = useState<string | null>(null);
+  const [filter, setFilter] = useState<"all" | OrderStatus>("all");
 
   // Live updates so the dashboard mirrors the kitchen board.
   useEffect(() => {
@@ -113,6 +132,17 @@ function OrdersDashboard({ initialOrders }: { initialOrders: Order[] }) {
     [orders]
   );
 
+  const visible =
+    filter === "all" ? sorted : sorted.filter((o) => o.status === filter);
+
+  const FILTERS: { id: "all" | OrderStatus; label: string }[] = [
+    { id: "all", label: "All" },
+    { id: "pending", label: "Pending" },
+    { id: "preparing", label: "Preparing" },
+    { id: "ready", label: "Ready" },
+    { id: "completed", label: "Completed" },
+  ];
+
   const stats = useMemo(() => {
     const paid = orders.filter((o) => o.paymentStatus === "paid");
     const revenue = paid.reduce((sum, o) => sum + o.total, 0);
@@ -138,11 +168,37 @@ function OrdersDashboard({ initialOrders }: { initialOrders: Order[] }) {
         <StatCard label="Avg order" value={peso(stats.avg)} Icon={Receipt} />
       </div>
 
-      {sorted.length === 0 ? (
-        <p className="text-muted text-center py-16">No orders yet.</p>
+      {/* Status filter */}
+      <div className="flex flex-wrap gap-2">
+        {FILTERS.map((f) => {
+          const n =
+            f.id === "all"
+              ? orders.length
+              : orders.filter((o) => o.status === f.id).length;
+          return (
+            <button
+              key={f.id}
+              onClick={() => setFilter(f.id)}
+              className={`chip ${filter === f.id ? "chip-active" : "chip-idle"}`}
+            >
+              {f.label}
+              <span
+                className={`ml-1.5 ${filter === f.id ? "text-white/70" : "text-muted"}`}
+              >
+                {n}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {visible.length === 0 ? (
+        <p className="text-muted text-center py-16">
+          {sorted.length === 0 ? "No orders yet." : "No orders in this status."}
+        </p>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-          {sorted.map((order) => (
+          {visible.map((order) => (
             <div key={order.id} className="card p-4">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
@@ -281,8 +337,29 @@ function MenuManager({ initialMenu }: { initialMenu: MenuItem[] }) {
   }
 
   return (
-    <div className="space-y-4">
-      {adding ? (
+    <div className="space-y-5">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <h2 className="text-lg font-bold">
+            Menu items{" "}
+            <span className="text-muted font-medium">({menu.length})</span>
+          </h2>
+          <p className="text-muted text-xs mt-0.5">
+            {menu.filter((m) => m.available).length} available ·{" "}
+            {menu.filter((m) => !m.available).length} sold out
+          </p>
+        </div>
+        {!adding && (
+          <button
+            onClick={() => setAdding(true)}
+            className="btn-brand px-5 py-2.5 text-sm shrink-0"
+          >
+            + Add item
+          </button>
+        )}
+      </div>
+
+      {adding && (
         <AddItemForm
           onCancel={() => setAdding(false)}
           onCreated={(item) => {
@@ -290,10 +367,6 @@ function MenuManager({ initialMenu }: { initialMenu: MenuItem[] }) {
             setAdding(false);
           }}
         />
-      ) : (
-        <button onClick={() => setAdding(true)} className="btn-brand w-full py-2.5 text-sm">
-          + Add menu item
-        </button>
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">

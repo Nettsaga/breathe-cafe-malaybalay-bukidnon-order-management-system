@@ -171,7 +171,7 @@ export default function QrPayment({ order }: { order: Order }) {
             />
           </svg>
         </div>
-        <h2 className="text-2xl font-black mb-1">Payment Successful!</h2>
+        <h2 className="text-2xl font-bold mb-1">Payment Successful!</h2>
         <p className="text-muted">Sending your order to the kitchen…</p>
       </div>
     );
@@ -196,7 +196,7 @@ export default function QrPayment({ order }: { order: Order }) {
             />
           </svg>
         </div>
-        <h2 className="text-2xl font-black mb-2">
+        <h2 className="text-2xl font-bold mb-2">
           {status === "expired" ? "QR Code Expired" : "Payment Failed"}
         </h2>
         <p className="text-muted text-sm mb-8 max-w-xs">
@@ -224,7 +224,7 @@ export default function QrPayment({ order }: { order: Order }) {
 
   return (
     <div className="flex-1 flex flex-col items-center px-6 py-8 text-center max-w-sm mx-auto w-full">
-      <h2 className="text-2xl font-black mb-1">Scan to Pay</h2>
+      <h2 className="text-2xl font-bold mb-1">Scan to Pay</h2>
       <p className="text-muted text-sm mb-2">
         Open GCash, Maya, or any QR Ph app and scan below.
       </p>
@@ -282,7 +282,7 @@ export default function QrPayment({ order }: { order: Order }) {
         <p className="text-muted text-xs uppercase tracking-wider mb-1">
           Amount Due
         </p>
-        <p className="text-3xl font-black text-brand">{peso(totalPrice)}</p>
+        <p className="text-3xl font-bold text-brand">{peso(totalPrice)}</p>
       </div>
 
       <div className="flex gap-2 items-center mb-2">

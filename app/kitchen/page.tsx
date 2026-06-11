@@ -94,7 +94,7 @@ export default function KitchenPage() {
     <div className="flex-1 flex flex-col bg-background">
       <header className="no-print sticky top-0 z-10 bg-surface border-b border-border px-6 py-4 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-black text-brand">Breathe Kitchen</h1>
+          <h1 className="text-xl font-bold text-brand">Breathe Kitchen</h1>
           <p className="text-muted text-sm">Live order queue</p>
         </div>
         <span
@@ -118,7 +118,7 @@ export default function KitchenPage() {
             {active.map((order) => (
               <div key={order.id} className="card p-4 flex flex-col">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-black text-lg">{order.tableLabel}</span>
+                  <span className="font-bold text-lg">{order.tableLabel}</span>
                   <span
                     className={`chip text-xs capitalize ${STATUS_STYLES[order.status]}`}
                   >

@@ -4,22 +4,35 @@ import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Search, UtensilsCrossed, Bike, ChevronRight } from "lucide-react";
+import {
+  Search,
+  UtensilsCrossed,
+  Bike,
+  ChevronRight,
+  Bean,
+  Coffee,
+  CupSoda,
+  Leaf,
+  Cherry,
+  Croissant,
+  CakeSlice,
+  type LucideIcon,
+} from "lucide-react";
 import { useCart } from "@/lib/store";
 import { peso } from "@/lib/format";
 import type { MenuItem, Promo, Table } from "@/lib/types";
 import AdCarousel from "./AdCarousel";
 import BottomNav from "./BottomNav";
 
-const CATEGORY_EMOJI: Record<string, string> = {
-  Signature: "⭐️",
-  "Hot Coffee": "☕️",
-  "Iced Coffee": "🧊",
-  "Matcha Series": "🍵",
-  "Fruit Tea": "🍓",
-  Pastries: "🥐",
-  Cakes: "🍰",
-  Meals: "🍽️",
+const CATEGORY_ICON: Record<string, LucideIcon> = {
+  Signature: Bean,
+  "Hot Coffee": Coffee,
+  "Iced Coffee": CupSoda,
+  "Matcha Series": Leaf,
+  "Fruit Tea": Cherry,
+  Pastries: Croissant,
+  Cakes: CakeSlice,
+  Meals: UtensilsCrossed,
 };
 
 const fadeUp = {
@@ -61,7 +74,7 @@ export default function HomeView({
           className="flex items-center justify-between mb-4"
         >
           <div>
-            <p className="text-2xl font-black leading-tight text-foreground">
+            <p className="text-2xl font-semibold leading-tight text-foreground">
               Hello, friend
             </p>
             <p className="text-muted text-sm mt-1">
@@ -132,22 +145,25 @@ export default function HomeView({
           custom={4}
           className="mb-7"
         >
-          <h3 className="font-black text-lg mb-3">Categories</h3>
+          <h3 className="font-semibold text-base mb-3">Categories</h3>
           <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-5 px-5">
-            {categories.map((cat) => (
-              <Link
-                key={cat}
-                href={`${menuHref}?c=${encodeURIComponent(cat)}`}
-                className="flex flex-col items-center gap-1.5 shrink-0"
-              >
-                <span className="w-16 h-16 rounded-2xl bg-surface-muted flex items-center justify-center text-2xl">
-                  {CATEGORY_EMOJI[cat] ?? "🍩"}
-                </span>
-                <span className="text-[11px] font-semibold text-muted text-center w-16 leading-tight">
-                  {cat}
-                </span>
-              </Link>
-            ))}
+            {categories.map((cat) => {
+              const Icon = CATEGORY_ICON[cat] ?? Coffee;
+              return (
+                <Link
+                  key={cat}
+                  href={`${menuHref}?c=${encodeURIComponent(cat)}`}
+                  className="flex flex-col items-center gap-1.5 shrink-0"
+                >
+                  <span className="w-16 h-16 rounded-2xl bg-surface-muted flex items-center justify-center text-brand">
+                    <Icon className="w-6 h-6" strokeWidth={1.7} />
+                  </span>
+                  <span className="text-[11px] font-medium text-muted text-center w-16 leading-tight">
+                    {cat}
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </motion.section>
 
@@ -160,7 +176,7 @@ export default function HomeView({
             custom={5}
           >
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-black text-lg">Crowd favorites</h3>
+              <h3 className="font-semibold text-base">Crowd favorites</h3>
               <Link
                 href={menuHref}
                 className="text-brand text-sm font-semibold flex items-center"
@@ -192,10 +208,10 @@ export default function HomeView({
                   {item.seriesLabel && (
                     <p className="series-label text-center">{item.seriesLabel}</p>
                   )}
-                  <p className="font-bold text-sm leading-tight line-clamp-1 text-center">
+                  <p className="font-semibold text-sm leading-snug line-clamp-1 text-center">
                     {item.name}
                   </p>
-                  <p className="text-foreground font-bold text-sm mt-0.5 text-center">
+                  <p className="text-foreground/90 font-medium text-sm mt-0.5 text-center">
                     {peso(item.price)}
                   </p>
                 </Link>

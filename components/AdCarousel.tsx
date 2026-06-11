@@ -51,7 +51,7 @@ export default function AdCarousel({ promos }: { promos: Promo[] }) {
               }}
             >
               <div className="relative z-10 max-w-[72%]">
-                <h3 className="text-xl font-black leading-tight">{p.title}</h3>
+                <h3 className="text-xl font-bold leading-tight">{p.title}</h3>
                 <p className="text-white/85 text-sm mt-1">{p.subtitle}</p>
                 {p.voucher && (
                   <span className="inline-flex items-center gap-1.5 mt-3 bg-white/20 backdrop-blur rounded-full px-3 py-1 text-xs font-bold">

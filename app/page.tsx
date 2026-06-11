@@ -30,7 +30,7 @@ export default function Home() {
       <span className="inline-flex items-center gap-2 chip chip-idle mb-6">
         Malaybalay, Bukidnon
       </span>
-      <h1 className="text-5xl font-black tracking-tight text-center text-brand">
+      <h1 className="text-5xl font-bold tracking-tight text-center text-brand">
         Breathe Cafe
       </h1>
       <p className="text-muted text-center mt-4 mb-12 text-lg max-w-md">

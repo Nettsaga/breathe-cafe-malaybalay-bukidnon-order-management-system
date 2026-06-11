@@ -100,7 +100,7 @@ export default function ProductDetail({
 
         <div className="text-center mb-7">
           {item.seriesLabel && <p className="series-label">{item.seriesLabel}</p>}
-          <h1 className="text-2xl font-black mt-1">{item.name}</h1>
+          <h1 className="text-2xl font-semibold mt-1">{item.name}</h1>
           <p className="text-muted text-sm mt-2 max-w-xs mx-auto">
             {item.description}
           </p>
@@ -113,7 +113,7 @@ export default function ProductDetail({
             return (
               <section key={group.id}>
                 <div className="flex items-baseline gap-2 mb-2">
-                  <h2 className="font-bold">{group.name}</h2>
+                  <h2 className="font-semibold">{group.name}</h2>
                   <span className="text-muted text-xs">
                     {group.type === "single"
                       ? group.required

@@ -5,21 +5,36 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, X, Plus, ShoppingBag, Ticket } from "lucide-react";
+import {
+  Search,
+  X,
+  Plus,
+  ShoppingBag,
+  Ticket,
+  Bean,
+  Coffee,
+  CupSoda,
+  Leaf,
+  Cherry,
+  Croissant,
+  CakeSlice,
+  UtensilsCrossed,
+  type LucideIcon,
+} from "lucide-react";
 import { useCart } from "@/lib/store";
 import { peso } from "@/lib/format";
 import type { MenuItem, Promo, Table } from "@/lib/types";
 import BottomNav from "./BottomNav";
 
-const CATEGORY_EMOJI: Record<string, string> = {
-  Signature: "⭐️",
-  "Hot Coffee": "☕️",
-  "Iced Coffee": "🧊",
-  "Matcha Series": "🍵",
-  "Fruit Tea": "🍓",
-  Pastries: "🥐",
-  Cakes: "🍰",
-  Meals: "🍽️",
+const CATEGORY_ICON: Record<string, LucideIcon> = {
+  Signature: Bean, // coffee bean — premium house line
+  "Hot Coffee": Coffee,
+  "Iced Coffee": CupSoda,
+  "Matcha Series": Leaf,
+  "Fruit Tea": Cherry,
+  Pastries: Croissant,
+  Cakes: CakeSlice,
+  Meals: UtensilsCrossed,
 };
 
 const PER_CATEGORY = 4;
@@ -135,7 +150,7 @@ export default function MenuBrowser({
       {/* Header — title with a sleek search icon beside it */}
       <header className="sticky top-0 z-20 bg-background/95 backdrop-blur px-5 pt-6 pb-3">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-black">Menu</h1>
+          <h1 className="text-xl font-semibold">Menu</h1>
           <button
             onClick={toggleSearch}
             aria-label={searchOpen ? "Close search" : "Search"}
@@ -193,7 +208,7 @@ export default function MenuBrowser({
               <p>No items found.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-x-3 gap-y-6">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-8">
               {searchResults.map((item, i) => (
                 <ProductCard
                   key={item.id}
@@ -210,20 +225,24 @@ export default function MenuBrowser({
         <div className="flex items-start">
           {/* Category sidebar = sticky scroll-spy + jump nav */}
           <aside className="sticky top-[68px] self-start w-[84px] shrink-0 max-h-[calc(100vh-68px-64px)] overflow-y-auto no-scrollbar py-2 z-10 bg-background">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => jumpTo(cat)}
-                className={`cat-item w-full ${
-                  activeCat === cat ? "cat-item-active" : "cat-item-idle"
-                }`}
-              >
-                <span className="text-2xl leading-none">
-                  {CATEGORY_EMOJI[cat] ?? "🍩"}
-                </span>
-                {cat}
-              </button>
-            ))}
+            {categories.map((cat) => {
+              const Icon = CATEGORY_ICON[cat] ?? Coffee;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => jumpTo(cat)}
+                  className={`cat-item w-full ${
+                    activeCat === cat ? "cat-item-active" : "cat-item-idle"
+                  }`}
+                >
+                  <Icon
+                    className="w-[22px] h-[22px]"
+                    strokeWidth={activeCat === cat ? 2 : 1.7}
+                  />
+                  {cat}
+                </button>
+              );
+            })}
           </aside>
 
           {/* Continuous sections (page scrolls) */}
@@ -256,13 +275,13 @@ export default function MenuBrowser({
                 ref={(el) => {
                   sectionRefs.current[cat] = el;
                 }}
-                className="mb-7 scroll-mt-[80px]"
+                className="mb-9 scroll-mt-[80px]"
               >
-                <h2 className="font-black text-lg mb-3 flex items-center gap-2">
-                  <span>{CATEGORY_EMOJI[cat]}</span>
+                <h2 className="text-[15px] font-semibold mb-4 flex items-center gap-2">
+                  <span className="w-1 h-4 rounded-full bg-brand" />
                   {cat}
                 </h2>
-                <div className="grid grid-cols-2 gap-x-3 gap-y-6">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-8">
                   {items.map((item, i) => (
                     <ProductCard
                       key={item.id}
@@ -357,15 +376,17 @@ function ProductCard({
         )}
       </button>
 
-      {item.seriesLabel && <p className="series-label">{item.seriesLabel}</p>}
+      {item.seriesLabel && (
+        <p className="series-label mb-0.5">{item.seriesLabel}</p>
+      )}
       <button
         onClick={() => !soldOut && onTap(item)}
         disabled={soldOut}
-        className="font-bold text-sm leading-tight line-clamp-2"
+        className="font-semibold text-sm leading-snug line-clamp-2"
       >
         {item.name}
       </button>
-      <p className="text-foreground font-bold text-sm mt-1">
+      <p className="text-foreground/90 font-medium text-sm mt-1">
         {soldOut ? "Sold out" : peso(item.price)}
       </p>
     </motion.div>

@@ -92,7 +92,7 @@ body {
     @apply bg-surface-muted text-muted hover:text-foreground;
   }
   .series-label {
-    @apply text-[11px] font-bold uppercase tracking-[0.12em] text-series;
+    @apply text-[11px] font-semibold uppercase tracking-[0.1em] text-series;
   }
   /* Menu category sidebar item — clean, active = navy + left indigo bar. */
   .cat-item {

@@ -19,7 +19,7 @@ export default function AdminView({
   return (
     <div className="flex-1 flex flex-col bg-background">
       <header className="bg-surface border-b border-border px-6 py-4">
-        <h1 className="text-xl font-black text-brand">Breathe Admin</h1>
+        <h1 className="text-xl font-bold text-brand">Breathe Admin</h1>
         <p className="text-muted text-sm">Menu &amp; table QR codes</p>
         <div className="flex gap-2 mt-4">
           <button

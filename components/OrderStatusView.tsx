@@ -49,7 +49,7 @@ export default function OrderStatusView({ initial }: { initial: Order }) {
     <div className="flex-1 flex flex-col bg-background">
       <header className="px-5 pt-8 pb-4 text-center">
         <p className="text-muted text-sm">{order.tableLabel}</p>
-        <h1 className="text-2xl font-black">Order {order.id}</h1>
+        <h1 className="text-xl font-semibold">Order {order.id}</h1>
         <span className="inline-block mt-2 chip chip-idle">
           {order.paymentStatus === "paid" ? "Paid · GCash" : order.paymentStatus}
         </span>

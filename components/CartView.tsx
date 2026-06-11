@@ -64,7 +64,7 @@ export default function CartView({ table }: { table: Table }) {
           <ChevronLeft className="w-5 h-5" />
         </Link>
         <div>
-          <h1 className="text-2xl font-black">My Order</h1>
+          <h1 className="text-xl font-semibold">My Order</h1>
           <p className="text-muted text-sm">{table.label} · Dine-in</p>
         </div>
       </header>
@@ -142,7 +142,7 @@ export default function CartView({ table }: { table: Table }) {
 
             {/* Payment details */}
             <div className="card p-5 mt-4">
-              <h2 className="font-bold mb-3">Payment details</h2>
+              <h2 className="font-semibold mb-3">Payment details</h2>
               <div className="space-y-2 text-sm">
                 <Row label="Subtotal" value={peso(grandTotal)} muted />
                 <Row label="Service charge" value="₱0" muted />

@@ -63,8 +63,8 @@ export default function ProductDetail({
 
   return (
     <div className="flex-1 flex flex-col bg-background">
-      {/* Top bar */}
-      <div className="sticky top-0 z-10 px-4 py-3 flex items-center gap-3 bg-background/95 backdrop-blur">
+      {/* Top bar — mobile only (desktop's back sits above the image) */}
+      <div className="lg:hidden sticky top-0 z-10 px-4 py-3 flex items-center gap-3 bg-background/95 backdrop-blur">
         <button
           onClick={() => router.back()}
           className="w-10 h-10 rounded-full bg-surface-muted flex items-center justify-center"
@@ -75,15 +75,23 @@ export default function ProductDetail({
         <span className="font-bold truncate">{item.name}</span>
       </div>
 
-      <main className="flex-1 overflow-y-auto px-5 lg:px-10 pb-40 lg:pb-32">
-        <div className="lg:grid lg:grid-cols-2 lg:gap-12 lg:max-w-5xl lg:mx-auto lg:items-start lg:pt-6">
-        {/* Floating hero */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="relative w-60 h-60 lg:w-full lg:h-auto lg:aspect-square mx-auto my-4 lg:my-0 lg:sticky lg:top-24 flex items-center justify-center"
-        >
+      <main className="flex-1 overflow-y-auto px-5 lg:px-10 pb-40 lg:pb-32 lg:flex">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-14 lg:max-w-4xl lg:m-auto lg:items-center w-full">
+        {/* Left column: back action above the floating hero */}
+        <div className="lg:flex lg:flex-col">
+          <button
+            onClick={() => router.back()}
+            className="group hidden lg:inline-flex items-center gap-1.5 self-start rounded-full bg-brand-light text-brand font-semibold text-sm px-5 py-2.5 mb-6 hover:bg-brand hover:text-white active:scale-95 transition-all"
+          >
+            <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+            Back to menu
+          </button>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative w-60 h-60 lg:w-full lg:max-w-[380px] lg:h-auto lg:aspect-square mx-auto my-4 lg:my-0 flex items-center justify-center"
+          >
           <div className="absolute inset-0 halo" />
           {item.imageUrl && (
             <div className="relative w-[82%] aspect-square rounded-full overflow-hidden shadow-xl">
@@ -97,7 +105,9 @@ export default function ProductDetail({
               />
             </div>
           )}
-        </motion.div>
+          </motion.div>
+        </div>
+        {/* end left column */}
 
         {/* Right column: title, description, options */}
         <div>
@@ -106,6 +116,9 @@ export default function ProductDetail({
           <h1 className="text-2xl lg:text-4xl font-semibold mt-1">{item.name}</h1>
           <p className="text-muted text-sm lg:text-base mt-2 max-w-xs lg:max-w-none mx-auto lg:mx-0">
             {item.description}
+          </p>
+          <p className="text-2xl lg:text-3xl font-bold text-brand mt-3">
+            {peso(unitPrice)}
           </p>
         </div>
 
@@ -166,31 +179,39 @@ export default function ProductDetail({
       </main>
 
       {/* Sticky add bar */}
-      <div className="fixed bottom-0 inset-x-0 z-20 bg-surface border-t border-border px-4 py-3 lg:py-5">
-        <div className="kiosk-container flex items-center gap-3">
+      <div className="fixed bottom-0 inset-x-0 z-20 bg-surface border-t border-border px-4 lg:px-10 py-3 lg:py-4">
+        <div className="max-w-md lg:max-w-4xl mx-auto flex items-center gap-3 lg:gap-5">
           <div className="flex items-center gap-2 bg-surface-muted rounded-full px-1 py-1">
             <button
               onClick={() => setQty((x) => Math.max(1, x - 1))}
-              className="w-9 h-9 rounded-full bg-surface text-brand flex items-center justify-center active:scale-90"
+              className="w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-surface text-brand flex items-center justify-center active:scale-90"
             >
               <Minus className="w-4 h-4" strokeWidth={2.5} />
             </button>
             <span className="w-6 text-center font-bold">{qty}</span>
             <button
               onClick={() => setQty((x) => x + 1)}
-              className="w-9 h-9 rounded-full bg-brand text-white flex items-center justify-center active:scale-90"
+              className="w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-brand text-white flex items-center justify-center active:scale-90"
             >
               <Plus className="w-4 h-4" strokeWidth={2.5} />
             </button>
           </div>
 
+          {/* Total (desktop) */}
+          <div className="hidden lg:flex flex-col leading-tight">
+            <span className="text-xs text-muted">Total</span>
+            <span className="text-xl font-bold text-brand">
+              {peso(unitPrice * qty)}
+            </span>
+          </div>
+
           <button
             onClick={addToCart}
             disabled={added}
-            className="btn-brand flex-1 flex items-center justify-between"
+            className="btn-brand flex-1 lg:flex-none lg:ml-auto lg:px-16 flex items-center justify-between lg:justify-center lg:gap-2"
           >
             <span>{added ? "Added ✓" : "Add to cart"}</span>
-            <span>{peso(unitPrice * qty)}</span>
+            <span className="lg:hidden">{peso(unitPrice * qty)}</span>
           </button>
         </div>
       </div>

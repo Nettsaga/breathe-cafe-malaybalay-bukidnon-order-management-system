@@ -68,7 +68,15 @@ export async function PATCH(
     return NextResponse.json({ error: "Nothing to update" }, { status: 400 });
   }
 
-  const updated = await updateOrder(id, patch);
+  let updated;
+  try {
+    updated = await updateOrder(id, patch);
+  } catch (err) {
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : "Failed to update order" },
+      { status: 500 }
+    );
+  }
   if (!updated) {
     return NextResponse.json({ error: "Order not found" }, { status: 404 });
   }

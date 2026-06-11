@@ -1,51 +1,72 @@
 // JSON-file data layer (proposal stage).
 //
 // Every read/write goes through this module. To move to a real database later
-// (Postgres/Sanity), reimplement these functions and nothing else changes.
+// (Postgres/Sanity/KV), reimplement these functions and nothing else changes.
 //
 // Writes are serialized through a per-file promise chain to avoid the classic
 // read-modify-write corruption when two requests land at once.
+//
+// Hosting note: Vercel's app filesystem is READ-ONLY, so writes there would
+// crash (EROFS) — which is why placing an order failed in production. We read
+// the bundled seed data but redirect writes to /tmp (the only writable path on
+// a Lambda). Caveat: /tmp is per-instance and wiped when the function is
+// recycled, so orders aren't durable or shared across instances. For a real
+// deployment, swap this module for a shared store (Vercel KV / Upstash /
+// Postgres) — and replace the in-memory SSE bus in lib/events.ts too.
 
 import { promises as fs } from "fs";
 import path from "path";
 import type { MenuItem, Order, Promo, Table } from "./types";
 
-const DATA_DIR = path.join(process.cwd(), "data");
+// Bundled, read-only seed data shipped with the app.
+const SEED_DIR = path.join(process.cwd(), "data");
+// Where writes land. Same as the seed dir locally; /tmp on Vercel.
+const WRITE_DIR = process.env.VERCEL ? path.join("/tmp", "breathe-data") : SEED_DIR;
 
 const FILES = {
-  menu: path.join(DATA_DIR, "menu.json"),
-  tables: path.join(DATA_DIR, "tables.json"),
-  orders: path.join(DATA_DIR, "orders.json"),
-  promos: path.join(DATA_DIR, "promos.json"),
+  menu: "menu.json",
+  tables: "tables.json",
+  orders: "orders.json",
+  promos: "promos.json",
 } as const;
 
-async function readJson<T>(file: string, fallback: T): Promise<T> {
-  try {
-    const raw = await fs.readFile(file, "utf8");
-    return JSON.parse(raw) as T;
-  } catch (err: unknown) {
-    if ((err as NodeJS.ErrnoException)?.code === "ENOENT") return fallback;
-    throw err;
+// Read the writable copy first (most recent), then fall back to the bundled
+// seed. Locally both dirs are the same, so this is just one read.
+async function readJson<T>(name: string, fallback: T): Promise<T> {
+  const dirs = WRITE_DIR === SEED_DIR ? [SEED_DIR] : [WRITE_DIR, SEED_DIR];
+  for (const dir of dirs) {
+    try {
+      const raw = await fs.readFile(path.join(dir, name), "utf8");
+      return JSON.parse(raw) as T;
+    } catch (err: unknown) {
+      if ((err as NodeJS.ErrnoException)?.code === "ENOENT") continue;
+      throw err;
+    }
   }
+  return fallback;
 }
 
-// One write chain per file path so concurrent writers queue instead of clobber.
+// One write chain per file so concurrent writers queue instead of clobber.
 const writeChains = new Map<string, Promise<unknown>>();
 
-function serialize<T>(file: string, task: () => Promise<T>): Promise<T> {
-  const prev = writeChains.get(file) ?? Promise.resolve();
+function serialize<T>(name: string, task: () => Promise<T>): Promise<T> {
+  const prev = writeChains.get(name) ?? Promise.resolve();
   const next = prev.then(task, task);
   // keep the chain alive but swallow errors so one failure doesn't poison it
   writeChains.set(
-    file,
+    name,
     next.catch(() => undefined)
   );
   return next;
 }
 
-async function writeJson<T>(file: string, data: T): Promise<void> {
-  await fs.mkdir(DATA_DIR, { recursive: true });
-  await fs.writeFile(file, JSON.stringify(data, null, 2), "utf8");
+async function writeJson<T>(name: string, data: T): Promise<void> {
+  await fs.mkdir(WRITE_DIR, { recursive: true });
+  await fs.writeFile(
+    path.join(WRITE_DIR, name),
+    JSON.stringify(data, null, 2),
+    "utf8"
+  );
 }
 
 // ─── Menu ──────────────────────────────────────────────────────────────────

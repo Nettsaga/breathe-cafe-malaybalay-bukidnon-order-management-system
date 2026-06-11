@@ -409,7 +409,7 @@ function ProductCard({
           )}
         </button>
         {qty > 0 && (
-          <span className="pointer-events-none absolute top-1 right-3 bg-brand text-white text-xs font-bold rounded-full min-w-6 h-6 px-1.5 flex items-center justify-center shadow">
+          <span className="pointer-events-none absolute top-1 right-3 lg:top-3 lg:right-4 bg-brand text-white text-xs lg:text-sm font-bold rounded-full min-w-6 h-6 lg:min-w-8 lg:h-8 px-1.5 lg:px-2.5 flex items-center justify-center shadow-md ring-2 ring-background">
             {qty}
           </span>
         )}

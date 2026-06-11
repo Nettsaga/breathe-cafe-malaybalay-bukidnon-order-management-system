@@ -137,7 +137,17 @@ export async function POST(req: NextRequest) {
     updatedAt: now,
   };
 
-  await createOrder(order);
+  try {
+    await createOrder(order);
+  } catch (err) {
+    return NextResponse.json(
+      {
+        error:
+          err instanceof Error ? err.message : "Failed to save order",
+      },
+      { status: 500 }
+    );
+  }
   emitOrderEvent({ type: "created", order });
 
   return NextResponse.json(order, { status: 201 });

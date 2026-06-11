@@ -49,8 +49,17 @@ export default function OrderSummaryPanel({
           })),
         }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Could not place order");
+      // Parse defensively — a crashed/empty server response shouldn't surface
+      // as a cryptic "Unexpected end of JSON input".
+      const text = await res.text();
+      let data: { id?: string; error?: string } = {};
+      try {
+        if (text) data = JSON.parse(text);
+      } catch {
+        data = { error: `Server error (HTTP ${res.status})` };
+      }
+      if (!res.ok || !data.id)
+        throw new Error(data.error ?? "Could not place order");
       router.push(`/checkout/${data.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");

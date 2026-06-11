@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getMenu, getPromos, getTable } from "@/lib/db";
+import { getMenu, getTable } from "@/lib/db";
 import MenuBrowser from "@/components/MenuBrowser";
 
 export const dynamic = "force-dynamic";
@@ -13,11 +13,7 @@ export default async function MenuPage({
 }) {
   const { tableId } = await params;
   const { q, c } = await searchParams;
-  const [table, menu, promos] = await Promise.all([
-    getTable(tableId),
-    getMenu(),
-    getPromos(),
-  ]);
+  const [table, menu] = await Promise.all([getTable(tableId), getMenu()]);
 
   if (!table) notFound();
 
@@ -25,7 +21,6 @@ export default async function MenuPage({
     <MenuBrowser
       table={table}
       menu={menu}
-      promo={promos[1] ?? promos[0] ?? null}
       initialCategory={c ?? null}
       searchFocused={q !== undefined}
     />

@@ -10,7 +10,6 @@ import {
   X,
   Plus,
   ShoppingBag,
-  Ticket,
   Bean,
   Coffee,
   CupSoda,
@@ -23,7 +22,7 @@ import {
 } from "lucide-react";
 import { useCart } from "@/lib/store";
 import { peso } from "@/lib/format";
-import type { MenuItem, Promo, Table } from "@/lib/types";
+import type { MenuItem, Table } from "@/lib/types";
 import BottomNav from "./BottomNav";
 
 const CATEGORY_ICON: Record<string, LucideIcon> = {
@@ -42,13 +41,11 @@ const PER_CATEGORY = 4;
 export default function MenuBrowser({
   table,
   menu,
-  promo,
   initialCategory,
   searchFocused,
 }: {
   table: Table;
   menu: MenuItem[];
-  promo: Promo | null;
   initialCategory: string | null;
   searchFocused: boolean;
 }) {
@@ -82,27 +79,12 @@ export default function MenuBrowser({
   );
   const [query, setQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(searchFocused);
-  const [hideHeader, setHideHeader] = useState(false);
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   useEffect(() => {
     if (searchOpen) searchRef.current?.focus();
   }, [searchOpen]);
-
-  // Direction-aware header: transparent/hidden on scroll down, visible on scroll up.
-  useEffect(() => {
-    let lastY = window.scrollY;
-    const onScroll = () => {
-      const y = window.scrollY;
-      if (y < 12) setHideHeader(false);
-      else if (y > lastY + 5) setHideHeader(true); // scrolling down
-      else if (y < lastY - 5) setHideHeader(false); // scrolling up
-      lastY = y;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   function toggleSearch() {
     setSearchOpen((open) => {
@@ -123,9 +105,6 @@ export default function MenuBrowser({
   const cartCount = mounted ? count() : 0;
   const cartTotal = mounted ? total() : 0;
 
-  // Header is solid (navy) at top / scrolling up / searching; transparent on scroll down.
-  const headerSolid = !hideHeader || searchOpen;
-
   // Scroll-spy on the viewport: highlight the section sitting under the header.
   useEffect(() => {
     if (searching) return;
@@ -137,7 +116,7 @@ export default function MenuBrowser({
         const cat = (visible[0]?.target as HTMLElement | undefined)?.dataset.cat;
         if (cat) setActiveCat(cat);
       },
-      { rootMargin: "-120px 0px -68% 0px", threshold: 0 }
+      { rootMargin: "-96px 0px -64% 0px", threshold: 0 }
     );
     Object.values(sectionRefs.current).forEach((el) => el && obs.observe(el));
     return () => obs.disconnect();
@@ -165,63 +144,52 @@ export default function MenuBrowser({
 
   return (
     <div className="flex-1 flex flex-col bg-background min-h-0">
-      {/* Header — navy when solid; transparent on scroll down (title + search stay). */}
-      <header
-        className={`sticky top-0 z-20 px-5 pt-6 pb-3 transition-colors duration-300 ${
-          headerSolid ? "bg-brand text-white" : "bg-transparent text-foreground"
-        }`}
-      >
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-semibold">Menu</h1>
-          <button
-            onClick={toggleSearch}
-            aria-label={searchOpen ? "Close search" : "Search"}
-            className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors active:scale-90 ${
-              headerSolid
-                ? "bg-white/15 text-white"
-                : "bg-surface-muted text-foreground"
-            }`}
-          >
-            {searchOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Search className="w-5 h-5 -scale-x-100" />
-            )}
-          </button>
-        </div>
-
-        <AnimatePresence initial={false}>
-          {searchOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="overflow-hidden"
-            >
-              <div className="mt-3 flex items-center gap-2 bg-surface-muted rounded-full px-4 py-2.5">
-                <Search className="w-5 h-5 text-muted -scale-x-100" />
-                <input
-                  ref={searchRef}
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search drinks, pastries…"
-                  className="flex-1 bg-transparent outline-none text-sm placeholder:text-muted"
-                />
-                {searching && (
-                  <button onClick={() => setQuery("")} aria-label="Clear search">
-                    <X className="w-4 h-4 text-muted" />
-                  </button>
-                )}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      {/* Navy header — sticky, always visible (does not disappear) */}
+      <header className="sticky top-0 z-20 bg-brand text-white px-5 pt-6 pb-4">
+        <h1 className="text-xl font-semibold">Menu</h1>
+        <p className="text-white/70 text-sm">{table.label} · Dine-in</p>
       </header>
+
+      {/* Floating search button — stays pinned on screen while you scroll */}
+      <button
+        onClick={toggleSearch}
+        aria-label={searchOpen ? "Close search" : "Search"}
+        className="fixed top-4 right-4 z-40 w-11 h-11 rounded-full bg-white text-brand shadow-lg flex items-center justify-center active:scale-90 transition-transform"
+      >
+        {searchOpen ? (
+          <X className="w-5 h-5" />
+        ) : (
+          <Search className="w-5 h-5 -scale-x-100" />
+        )}
+      </button>
+
+      {/* Search field slides down from the top, pinned while searching */}
+      <AnimatePresence>
+        {searchOpen && (
+          <motion.div
+            initial={{ y: -64, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -64, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed top-0 inset-x-0 z-30 bg-background/95 backdrop-blur px-5 pt-4 pb-3"
+          >
+            <div className="flex items-center gap-2 bg-surface-muted rounded-full pl-4 pr-16 py-2.5">
+              <Search className="w-5 h-5 text-muted -scale-x-100" />
+              <input
+                ref={searchRef}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search drinks, pastries…"
+                className="flex-1 bg-transparent outline-none text-sm placeholder:text-muted"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Search results take over the whole view */}
       {searching ? (
-        <main className="flex-1 px-5 py-4 pb-40">
+        <main className="flex-1 px-5 pt-20 pb-40">
           <p className="text-muted text-sm mb-3">
             {searchResults.length} result{searchResults.length === 1 ? "" : "s"} for
             “{query}”
@@ -247,8 +215,8 @@ export default function MenuBrowser({
         </main>
       ) : (
         <div className="flex items-start">
-          {/* Category sidebar = sticky scroll-spy + jump nav */}
-          <aside className="sticky top-[68px] self-start w-[84px] shrink-0 max-h-[calc(100vh-68px-64px)] overflow-y-auto no-scrollbar py-2 z-10 bg-background">
+          {/* Category sidebar = sticky scroll-spy + jump nav (under the header) */}
+          <aside className="sticky top-[92px] self-start w-[84px] shrink-0 max-h-[calc(100vh-92px-64px)] overflow-y-auto no-scrollbar pt-2 pb-2 z-10 bg-background">
             {categories.map((cat) => {
               const Icon = CATEGORY_ICON[cat] ?? Coffee;
               return (
@@ -270,28 +238,7 @@ export default function MenuBrowser({
           </aside>
 
           {/* Continuous sections (page scrolls) */}
-          <main className="flex-1 px-4 pt-2 pb-40 min-w-0">
-            {promo && (
-              <div
-                className="rounded-2xl p-4 mb-5 text-white flex items-center gap-3"
-                style={{
-                  backgroundImage: `linear-gradient(135deg, ${promo.from}, ${promo.to})`,
-                }}
-              >
-                <span className="text-3xl">{promo.emoji}</span>
-                <div className="flex-1 min-w-0">
-                  <p className="font-bold text-sm leading-tight">{promo.title}</p>
-                  <p className="text-white/80 text-xs">{promo.subtitle}</p>
-                </div>
-                {promo.voucher && (
-                  <span className="flex items-center gap-1 bg-white/20 rounded-full px-2.5 py-1 text-[11px] font-bold shrink-0">
-                    <Ticket className="w-3 h-3" />
-                    {promo.voucher}
-                  </span>
-                )}
-              </div>
-            )}
-
+          <main className="flex-1 pl-4 pr-4 pt-3 pb-40 min-w-0 border-l border-border/70">
             {sections.map(({ cat, items }) => (
               <section
                 key={cat}
@@ -299,7 +246,7 @@ export default function MenuBrowser({
                 ref={(el) => {
                   sectionRefs.current[cat] = el;
                 }}
-                className="mb-9 scroll-mt-[80px]"
+                className="mb-9 scroll-mt-[96px]"
               >
                 <h2 className="text-[15px] font-semibold mb-4 flex items-center gap-2">
                   <span className="w-1 h-4 rounded-full bg-brand" />

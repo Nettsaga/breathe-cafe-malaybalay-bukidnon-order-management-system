@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   UtensilsCrossed,
@@ -44,6 +44,20 @@ const fadeUp = {
   }),
 };
 
+// Tap-the-cup "coffee fortunes" — light, on-brand, no cheap emoji.
+const COFFEE_TIPS = [
+  "You've got main-character energy today.",
+  "Today's forecast: 100% chance of caffeine.",
+  "Trust the brew.",
+  "Good things come to those who caffeinate.",
+  "You + coffee = unstoppable.",
+  "Sip happens — enjoy it.",
+  "Stay grounded, like good coffee.",
+  "One more cup never hurt anybody.",
+  "Certified brew-crew member.",
+  "May your cup runneth over.",
+];
+
 export default function HomeView({
   table,
   featured,
@@ -61,6 +75,23 @@ export default function HomeView({
   }, [table.id, table.label, setTable]);
 
   const menuHref = `/t/${table.id}/menu`;
+
+  // Tappable coffee cup → wiggles and pops a random "coffee fortune".
+  const tipIndex = useRef(0);
+  const [tip, setTip] = useState<string | null>(null);
+  const [pop, setPop] = useState(0);
+
+  function tapCup() {
+    setTip(COFFEE_TIPS[tipIndex.current % COFFEE_TIPS.length]);
+    tipIndex.current += 1;
+    setPop((p) => p + 1);
+  }
+
+  useEffect(() => {
+    if (!tip) return;
+    const id = setTimeout(() => setTip(null), 3200);
+    return () => clearTimeout(id);
+  }, [tip, pop]);
 
   return (
     <div className="flex-1 flex flex-col bg-background">
@@ -84,8 +115,36 @@ export default function HomeView({
                 Breathe Cafe
               </p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center">
-              <Coffee className="w-6 h-6 text-brand" strokeWidth={1.8} />
+            <div className="relative shrink-0">
+              <motion.button
+                onClick={tapCup}
+                whileTap={{ scale: 0.85 }}
+                aria-label="Tap for a coffee fortune"
+                className="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center"
+              >
+                <motion.span
+                  key={pop}
+                  animate={{ rotate: [0, -16, 12, -6, 0] }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                >
+                  <Coffee className="w-6 h-6 text-brand" strokeWidth={1.8} />
+                </motion.span>
+              </motion.button>
+
+              <AnimatePresence>
+                {tip && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.95 }}
+                    transition={{ duration: 0.22 }}
+                    className="absolute right-0 top-14 z-30 w-52 bg-brand text-white text-xs leading-snug rounded-2xl px-3.5 py-2.5 shadow-xl"
+                  >
+                    <span className="absolute -top-1 right-5 w-2.5 h-2.5 bg-brand rotate-45" />
+                    {tip}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
 

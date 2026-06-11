@@ -160,6 +160,7 @@
   },
   {
     "id": "sea-salt-latte",
+    "featured": true,
     "name": "Sea Salt Cream Latte",
     "description": "Bold espresso under a cloud of lightly salted cream — where sweet meets savory.",
     "price": 165,
@@ -737,6 +738,7 @@
   },
   {
     "id": "matcha-cookie-latte",
+    "featured": true,
     "name": "Matcha Cookie Latte",
     "description": "Creamy matcha folded with buttery cookie crumble in every sip.",
     "price": 160,
@@ -1059,6 +1061,7 @@
   },
   {
     "id": "brown-sugar-latte",
+    "featured": true,
     "name": "Brown Sugar Oat Latte",
     "description": "Espresso and oat milk swirled with slow-caramelized brown sugar.",
     "price": 165,
@@ -1283,6 +1286,7 @@
   },
   {
     "id": "basque-cheesecake",
+    "featured": true,
     "name": "Basque Burnt Cheesecake",
     "description": "Caramelized, crackly top giving way to a meltingly creamy center.",
     "price": 165,

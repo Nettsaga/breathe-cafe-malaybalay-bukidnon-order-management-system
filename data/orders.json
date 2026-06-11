@@ -141,5 +141,105 @@
     "createdAt": "2026-06-11T19:20:21.074Z",
     "updatedAt": "2026-06-11T19:20:47.391Z",
     "paymentRef": "pi_jLVXZGV7En8i1fiRazKE9VYL"
+  },
+  {
+    "id": "BRC-2PKTU",
+    "tableId": "table-7",
+    "tableLabel": "Table 7",
+    "items": [
+      {
+        "menuItemId": "ube-halaya-cake",
+        "name": "Classic Ube Halaya Cake",
+        "price": 170,
+        "qty": 1
+      },
+      {
+        "menuItemId": "iced-cafe-latte",
+        "name": "Iced Cafe Latte",
+        "price": 150,
+        "qty": 1,
+        "optionsLabel": "Regular · 100%"
+      }
+    ],
+    "total": 320,
+    "status": "pending",
+    "paymentStatus": "unpaid",
+    "createdAt": "2026-06-11T19:54:11.363Z",
+    "updatedAt": "2026-06-11T19:54:11.363Z"
+  },
+  {
+    "id": "BRC-JJTQD",
+    "tableId": "table-7",
+    "tableLabel": "Table 7",
+    "items": [
+      {
+        "menuItemId": "ube-halaya-cake",
+        "name": "Classic Ube Halaya Cake",
+        "price": 170,
+        "qty": 1
+      },
+      {
+        "menuItemId": "iced-cafe-latte",
+        "name": "Iced Cafe Latte",
+        "price": 150,
+        "qty": 1,
+        "optionsLabel": "Regular · 100%"
+      }
+    ],
+    "total": 320,
+    "status": "pending",
+    "paymentStatus": "unpaid",
+    "createdAt": "2026-06-11T19:54:18.162Z",
+    "updatedAt": "2026-06-11T19:54:18.162Z"
+  },
+  {
+    "id": "BRC-DOA96",
+    "tableId": "table-7",
+    "tableLabel": "Table 7",
+    "items": [
+      {
+        "menuItemId": "ube-halaya-cake",
+        "name": "Classic Ube Halaya Cake",
+        "price": 170,
+        "qty": 1
+      },
+      {
+        "menuItemId": "iced-cafe-latte",
+        "name": "Iced Cafe Latte",
+        "price": 150,
+        "qty": 1,
+        "optionsLabel": "Regular · 100%"
+      }
+    ],
+    "total": 320,
+    "status": "pending",
+    "paymentStatus": "unpaid",
+    "createdAt": "2026-06-11T19:55:06.066Z",
+    "updatedAt": "2026-06-11T19:55:06.066Z"
+  },
+  {
+    "id": "BRC-8XDLJ",
+    "tableId": "table-7",
+    "tableLabel": "Table 7",
+    "items": [
+      {
+        "menuItemId": "ube-halaya-cake",
+        "name": "Classic Ube Halaya Cake",
+        "price": 170,
+        "qty": 1
+      },
+      {
+        "menuItemId": "iced-cafe-latte",
+        "name": "Iced Cafe Latte",
+        "price": 150,
+        "qty": 1,
+        "optionsLabel": "Regular · 100%"
+      }
+    ],
+    "total": 320,
+    "status": "pending",
+    "paymentStatus": "unpaid",
+    "createdAt": "2026-06-11T19:57:59.317Z",
+    "updatedAt": "2026-06-11T19:57:59.317Z"
   }
 ]

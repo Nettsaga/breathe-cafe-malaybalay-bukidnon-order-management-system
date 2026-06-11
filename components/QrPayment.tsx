@@ -9,6 +9,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/store";
 import { peso } from "@/lib/format";
@@ -259,9 +260,19 @@ export default function QrPayment({ order }: { order: Order }) {
   const isProcessing = status === "processing";
 
   return (
-    <div className="flex-1 flex flex-col items-center px-6 py-8 text-center max-w-sm mx-auto w-full">
-      <h2 className="text-2xl font-bold mb-1">Scan to Pay</h2>
-      <p className="text-muted text-sm mb-2">
+    <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 lg:py-16 text-center max-w-sm lg:max-w-md mx-auto w-full">
+      {/* Back to cart — lets the customer step out of payment to edit their order */}
+      <button
+        onClick={() => router.push(`/t/${order.tableId}/cart`)}
+        className="fixed top-4 left-4 lg:top-6 lg:left-6 z-10 flex items-center gap-1 bg-surface-muted text-foreground rounded-full pl-2 pr-4 py-2 text-sm font-medium shadow-sm hover:bg-border active:scale-95 transition"
+        aria-label="Back to cart"
+      >
+        <ChevronLeft className="w-5 h-5" />
+        Back
+      </button>
+
+      <h2 className="text-2xl lg:text-4xl font-bold mb-1">Scan to Pay</h2>
+      <p className="text-muted text-sm lg:text-base mb-2">
         Open GCash, Maya, or any QR Ph app and scan below.
       </p>
       <p className="text-muted/70 text-xs mb-7">
@@ -269,7 +280,7 @@ export default function QrPayment({ order }: { order: Order }) {
       </p>
 
       {/* QR box */}
-      <div className="w-60 h-60 bg-surface border border-border rounded-3xl flex items-center justify-center mb-6 relative overflow-hidden shadow-sm">
+      <div className="w-60 h-60 lg:w-72 lg:h-72 bg-surface border border-border rounded-3xl flex items-center justify-center mb-6 relative overflow-hidden shadow-sm">
         {isLoading && (
           <div className="flex flex-col items-center gap-2 text-muted">
             <Spinner />
@@ -314,11 +325,11 @@ export default function QrPayment({ order }: { order: Order }) {
       </div>
 
       {/* Amount */}
-      <div className="card w-full px-4 py-3 mb-3">
+      <div className="card w-full px-4 py-3 lg:py-5 mb-3">
         <p className="text-muted text-xs uppercase tracking-wider mb-1">
           Amount Due
         </p>
-        <p className="text-3xl font-bold text-brand">{peso(chargeAmount)}</p>
+        <p className="text-3xl lg:text-5xl font-bold text-brand">{peso(chargeAmount)}</p>
         <p className="text-muted text-xs mt-1">
           Demo mode · order total {peso(totalPrice)}
         </p>

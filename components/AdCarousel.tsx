@@ -45,22 +45,22 @@ export default function AdCarousel({ promos }: { promos: Promo[] }) {
         {promos.map((p) => (
           <div key={p.id} className="snap-item shrink-0 w-full">
             <div
-              className="relative h-44 rounded-3xl overflow-hidden p-5 flex flex-col justify-center text-white"
+              className="relative h-44 lg:h-64 xl:h-72 rounded-3xl overflow-hidden p-5 lg:p-10 flex flex-col justify-center text-white"
               style={{
                 backgroundImage: `linear-gradient(135deg, ${p.from}, ${p.to})`,
               }}
             >
               <div className="relative z-10 max-w-[72%]">
-                <h3 className="text-xl font-bold leading-tight">{p.title}</h3>
-                <p className="text-white/85 text-sm mt-1">{p.subtitle}</p>
+                <h3 className="text-xl lg:text-3xl font-bold leading-tight">{p.title}</h3>
+                <p className="text-white/85 text-sm lg:text-lg mt-1">{p.subtitle}</p>
                 {p.voucher && (
-                  <span className="inline-flex items-center gap-1.5 mt-3 bg-white/20 backdrop-blur rounded-full px-3 py-1 text-xs font-bold">
+                  <span className="inline-flex items-center gap-1.5 mt-3 bg-white/20 backdrop-blur rounded-full px-3 py-1 text-xs lg:text-sm font-bold">
                     <Ticket className="w-3.5 h-3.5" />
                     {p.voucher}
                   </span>
                 )}
               </div>
-              <span className="absolute -right-3 -bottom-5 text-[120px] leading-none opacity-25 select-none">
+              <span className="absolute -right-3 -bottom-5 text-[120px] lg:text-[200px] leading-none opacity-25 select-none">
                 {p.emoji}
               </span>
             </div>

@@ -40,18 +40,20 @@ export default async function TableHubPage({
   const hub = buildTableHub(table.id, table.label, menu, orders);
 
   return (
-    <div className="flex-1 flex flex-col bg-background">
+    <div className="flex-1 flex flex-col bg-background lg:pl-24 xl:pl-28">
       {/* Sticky greeting header */}
-      <header className="sticky top-0 z-20 bg-brand text-white px-5 pt-8 pb-5">
+      <header className="sticky top-0 z-20 bg-brand text-white px-5 pt-8 pb-5 lg:px-10 lg:pt-10 lg:pb-8">
         <p className="text-white/70 text-sm">you&apos;re at {table.label}</p>
-        <h1 className="text-2xl font-semibold leading-tight">
+        <h1 className="text-2xl lg:text-4xl font-semibold leading-tight">
           Good to see you :&gt;
         </h1>
       </header>
 
-      <main className="flex-1 max-w-md mx-auto w-full px-5 py-5 pb-28">
+      <main className="flex-1 kiosk-container px-5 lg:px-8 py-5 lg:py-8 pb-28">
+        {/* Ranking + daily grind — side by side on desktop */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-6 lg:items-start">
         {/* Brew-crew ranking */}
-        <div className="card p-5 mb-6 flex items-center gap-4">
+        <div className="card p-5 mb-6 lg:mb-0 flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl bg-brand-light flex items-center justify-center shrink-0">
             <Coffee className="w-7 h-7 text-brand" strokeWidth={1.8} />
           </div>
@@ -67,27 +69,32 @@ export default async function TableHubPage({
         </div>
 
         {/* Fun stats */}
-        <div className="flex items-center gap-2 mb-3">
-          <TrendingUp className="w-4 h-4 text-series" />
-          <h2 className="text-[15px] font-semibold">the daily grind</h2>
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <TrendingUp className="w-4 h-4 text-series" />
+            <h2 className="text-[15px] lg:text-lg font-semibold">the daily grind</h2>
+          </div>
+          <div className="space-y-2.5 mb-7 lg:mb-0">
+            {hub.funFacts.map((f, i) => {
+              const Icon = FACT_ICON[f.icon];
+              return (
+                <div
+                  key={i}
+                  className="bg-surface-muted/60 rounded-2xl px-4 py-3 flex items-center gap-3"
+                >
+                  <span className="w-9 h-9 rounded-xl bg-surface flex items-center justify-center shrink-0">
+                    <Icon className="w-[18px] h-[18px] text-brand" strokeWidth={1.8} />
+                  </span>
+                  <p className="text-sm text-foreground/90">{f.text}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <div className="space-y-2.5 mb-7">
-          {hub.funFacts.map((f, i) => {
-            const Icon = FACT_ICON[f.icon];
-            return (
-              <div
-                key={i}
-                className="bg-surface-muted/60 rounded-2xl px-4 py-3 flex items-center gap-3"
-              >
-                <span className="w-9 h-9 rounded-xl bg-surface flex items-center justify-center shrink-0">
-                  <Icon className="w-[18px] h-[18px] text-brand" strokeWidth={1.8} />
-                </span>
-                <p className="text-sm text-foreground/90">{f.text}</p>
-              </div>
-            );
-          })}
         </div>
+        {/* end ranking + daily grind grid */}
 
+        <div className="mt-7">
         {/* Don't know what to order? → the usual */}
         {hub.usualItem && (
           <section className="mb-7">
@@ -160,10 +167,10 @@ export default async function TableHubPage({
         {/* Branch out */}
         {hub.popular.length > 0 && (
           <>
-            <h2 className="text-[15px] font-semibold mb-3">
+            <h2 className="text-[15px] lg:text-lg font-semibold mb-3">
               the {table.label} squad also swears by these
             </h2>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-6 lg:gap-y-10">
               {hub.popular.map((item) => (
                 <Link
                   key={item.id}
@@ -205,6 +212,8 @@ export default async function TableHubPage({
         >
           Browse full menu <ChevronRight className="w-4 h-4" />
         </Link>
+        </div>
+        {/* end content wrapper */}
       </main>
 
       <BottomNav tableId={table.id} />

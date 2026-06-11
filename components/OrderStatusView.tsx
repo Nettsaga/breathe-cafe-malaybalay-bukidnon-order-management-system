@@ -80,24 +80,25 @@ export default function OrderStatusView({ initial }: { initial: Order }) {
     <div className="flex-1 flex flex-col bg-background">
       <header className="sticky top-0 z-20 bg-background/90 backdrop-blur px-5 pt-8 pb-4 text-center">
         <p className="text-muted text-sm">{order.tableLabel}</p>
-        <h1 className="text-xl font-semibold">Order {order.id}</h1>
+        <h1 className="text-xl lg:text-3xl font-semibold">Order {order.id}</h1>
         <span className="inline-block mt-2 chip bg-success/15 text-success">
           {order.paymentStatus === "paid" ? "Paid · GCash" : order.paymentStatus}
         </span>
       </header>
 
-      <main className="flex-1 px-5 py-5 max-w-md mx-auto w-full">
+      <main className="flex-1 px-5 py-5 lg:py-10 max-w-md lg:max-w-3xl mx-auto w-full">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-start">
         {/* Continuous loader + cycling phrases */}
-        <div className="card p-7 mb-5 flex flex-col items-center text-center">
-          <div className="relative w-28 h-28 mb-5">
+        <div className="card p-7 mb-5 lg:mb-0 flex flex-col items-center text-center">
+          <div className="relative w-28 h-28 lg:w-40 lg:h-40 mb-5">
             {isCompleted ? (
               <motion.div
                 initial={{ scale: 0.7, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                className="w-28 h-28 rounded-full bg-success text-white flex items-center justify-center"
+                className="w-28 h-28 lg:w-40 lg:h-40 rounded-full bg-success text-white flex items-center justify-center"
               >
-                <Check className="w-12 h-12" strokeWidth={2.5} />
+                <Check className="w-12 h-12 lg:w-16 lg:h-16" strokeWidth={2.5} />
               </motion.div>
             ) : (
               <>
@@ -116,7 +117,7 @@ export default function OrderStatusView({ initial }: { initial: Order }) {
                     animate={{ y: [0, -4, 0] }}
                     transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
                   >
-                    <Coffee className="w-10 h-10 text-brand" strokeWidth={1.8} />
+                    <Coffee className="w-10 h-10 lg:w-14 lg:h-14 text-brand" strokeWidth={1.8} />
                   </motion.span>
                 </div>
               </>
@@ -133,7 +134,7 @@ export default function OrderStatusView({ initial }: { initial: Order }) {
           </span>
 
           {/* cycling phrase */}
-          <div className="h-7 flex items-center justify-center">
+          <div className="h-7 lg:h-9 flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.p
                 key={phrase}
@@ -141,7 +142,7 @@ export default function OrderStatusView({ initial }: { initial: Order }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.3 }}
-                className="text-lg font-semibold"
+                className="text-lg lg:text-2xl font-semibold"
               >
                 {phrase}
               </motion.p>
@@ -214,10 +215,12 @@ export default function OrderStatusView({ initial }: { initial: Order }) {
 
         <Link
           href={`/t/${order.tableId}/menu`}
-          className="btn-ghost w-full mt-5 block text-center"
+          className="btn-ghost w-full mt-5 block text-center lg:col-span-2"
         >
           Order more
         </Link>
+        </div>
+        {/* end loader + receipt grid */}
       </main>
     </div>
   );

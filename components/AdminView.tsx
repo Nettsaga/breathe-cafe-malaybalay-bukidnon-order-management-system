@@ -27,8 +27,8 @@ export default function AdminView({
 
   return (
     <div className="flex-1 flex flex-col bg-background">
-      <header className="sticky top-0 z-20 bg-surface border-b border-border px-6 py-4">
-        <h1 className="text-xl font-bold text-brand">Breathe Admin</h1>
+      <header className="sticky top-0 z-20 bg-surface border-b border-border px-6 py-4 lg:px-10 lg:py-5">
+        <h1 className="text-xl lg:text-2xl font-bold text-brand">Breathe Admin</h1>
         <p className="text-muted text-sm">Orders, menu &amp; table QR codes</p>
         <div className="flex gap-2 mt-4">
           {tabs.map((t) => (
@@ -43,7 +43,7 @@ export default function AdminView({
         </div>
       </header>
 
-      <main className="flex-1 p-5 max-w-3xl mx-auto w-full">
+      <main className="flex-1 p-5 lg:p-8 max-w-3xl lg:max-w-5xl mx-auto w-full">
         {tab === "orders" && <OrdersDashboard initialOrders={initialOrders} />}
         {tab === "menu" && <MenuManager initialMenu={initialMenu} />}
         {tab === "qr" && <QrManager tables={tables} />}
@@ -132,7 +132,7 @@ function OrdersDashboard({ initialOrders }: { initialOrders: Order[] }) {
       {sorted.length === 0 ? (
         <p className="text-muted text-center py-16">No orders yet.</p>
       ) : (
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           {sorted.map((order) => (
             <div key={order.id} className="card p-4">
               <div className="flex items-center justify-between gap-3">
@@ -272,7 +272,7 @@ function MenuManager({ initialMenu }: { initialMenu: MenuItem[] }) {
         </button>
       )}
 
-      <div className="space-y-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {menu.map((item) => (
           <MenuRow
             key={item.id}

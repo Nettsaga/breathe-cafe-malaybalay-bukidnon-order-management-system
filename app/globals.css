@@ -65,6 +65,11 @@ body {
 
 /* ─── Shared component utilities (cool / floating) ───────────────────────── */
 @layer components {
+  /* Page width: stays a narrow mobile column, widens into a kiosk canvas on
+     desktop. max-w-md is listed first so the mobile layout is byte-identical. */
+  .kiosk-container {
+    @apply max-w-md mx-auto w-full lg:max-w-5xl xl:max-w-6xl;
+  }
   /* Soft borderless card — used for grouping (cart, payment, kitchen). */
   .card {
     @apply bg-surface rounded-3xl shadow-[0_6px_24px_rgba(28,36,64,0.06)];

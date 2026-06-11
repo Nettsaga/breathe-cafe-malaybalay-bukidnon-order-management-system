@@ -29,6 +29,7 @@ import { useCart } from "@/lib/store";
 import { peso } from "@/lib/format";
 import type { MenuItem, Table } from "@/lib/types";
 import BottomNav from "./BottomNav";
+import OrderSummaryPanel from "./OrderSummaryPanel";
 
 const CATEGORY_ICON: Record<string, LucideIcon> = {
   Signature: Bean, // coffee bean — premium house line
@@ -170,23 +171,24 @@ export default function MenuBrowser({
   }
 
   return (
-    <div className="flex-1 flex flex-col bg-background min-h-0">
-      {/* Navy header — auto-hides on scroll down, reveals on scroll up */}
+    <div className="flex-1 flex flex-col bg-background min-h-0 lg:pl-24 xl:pl-28">
+      {/* Navy header — mobile only (auto-hides on scroll). Removed on desktop:
+          the kiosk frame lets the nav + category rails run from the top. */}
       <motion.header
         variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
         animate={headerHidden ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="sticky top-0 z-20 bg-brand text-white px-5 pt-6 pb-4"
+        className="lg:hidden sticky top-0 z-20 bg-brand text-white px-5 pt-6 pb-4"
       >
         <h1 className="text-xl font-semibold">Menu</h1>
         <p className="text-white/70 text-sm">{table.label} · Dine-in</p>
       </motion.header>
 
-      {/* Floating search button — stays pinned on screen while you scroll */}
+      {/* Floating search button — mobile only (desktop searches via the panel bar) */}
       <button
         onClick={toggleSearch}
         aria-label={searchOpen ? "Close search" : "Search"}
-        className="fixed top-4 right-4 z-40 w-11 h-11 rounded-full bg-white text-brand shadow-lg flex items-center justify-center active:scale-90 transition-transform"
+        className="lg:hidden fixed top-4 right-4 z-40 w-11 h-11 rounded-full bg-white text-brand shadow-lg flex items-center justify-center active:scale-90 transition-transform"
       >
         {searchOpen ? (
           <X className="w-5 h-5" />
@@ -195,7 +197,7 @@ export default function MenuBrowser({
         )}
       </button>
 
-      {/* Search field slides down from the top, pinned while searching */}
+      {/* Mobile search field slides down from the top while searching */}
       <AnimatePresence>
         {searchOpen && (
           <motion.div
@@ -203,7 +205,7 @@ export default function MenuBrowser({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -64, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed top-0 inset-x-0 z-30 bg-background/95 backdrop-blur px-5 pt-4 pb-3"
+            className="lg:hidden fixed top-0 inset-x-0 z-30 bg-background/95 backdrop-blur px-5 pt-4 pb-3"
           >
             <div className="flex items-center gap-2 bg-surface-muted rounded-full pl-4 pr-16 py-2.5">
               <Search className="w-5 h-5 text-muted -scale-x-100" />
@@ -219,77 +221,83 @@ export default function MenuBrowser({
         )}
       </AnimatePresence>
 
-      {/* Search results take over the whole view */}
-      {searching ? (
-        <main className="flex-1 px-5 pt-20 pb-40">
-          <p className="text-muted text-sm mb-3">
-            {searchResults.length} result{searchResults.length === 1 ? "" : "s"} for
-            “{query}”
-          </p>
-          {searchResults.length === 0 ? (
-            <div className="text-center py-20 text-muted">
-              <p className="text-4xl mb-2">🔍</p>
-              <p>No items found.</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 gap-x-4 gap-y-8">
-              {searchResults.map((item, i) => (
-                <ProductCard
-                  key={item.id}
-                  item={item}
-                  index={i}
-                  qty={mounted ? qtyOf(item.id) : 0}
-                  onOpen={openDetail}
-                  onAdd={quickAdd}
+      {/* Body: category rail | grid-or-results | right column (search + order) */}
+      <div className="flex items-start">
+        {/* Category sidebar — sticky scroll-spy + jump nav; hidden on mobile search */}
+        <aside
+          className={`${searching ? "hidden lg:block" : ""} sticky self-start w-[84px] lg:w-28 shrink-0 max-h-[calc(100vh-80px)] overflow-y-auto no-scrollbar pt-2 lg:pt-4 pb-2 z-10 bg-background transition-[top] duration-300 lg:!top-0 ${
+            headerHidden ? "top-2" : "top-[92px]"
+          }`}
+        >
+          {categories.map((cat) => {
+            const Icon = CATEGORY_ICON[cat] ?? Coffee;
+            return (
+              <button
+                key={cat}
+                onClick={() => jumpTo(cat)}
+                className={`cat-item w-full lg:text-xs lg:py-4 ${
+                  activeCat === cat ? "cat-item-active" : "cat-item-idle"
+                }`}
+              >
+                <Icon
+                  className="w-[22px] h-[22px] lg:w-7 lg:h-7"
+                  strokeWidth={activeCat === cat ? 2 : 1.7}
                 />
-              ))}
-            </div>
-          )}
-        </main>
-      ) : (
-        <div className="flex items-start">
-          {/* Category sidebar = sticky scroll-spy + jump nav; rises when header hides */}
-          <aside
-            className={`sticky self-start w-[84px] shrink-0 max-h-[calc(100vh-80px)] overflow-y-auto no-scrollbar pt-2 pb-2 z-10 bg-background transition-[top] duration-300 ${
-              headerHidden ? "top-2" : "top-[92px]"
-            }`}
-          >
-            {categories.map((cat) => {
-              const Icon = CATEGORY_ICON[cat] ?? Coffee;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => jumpTo(cat)}
-                  className={`cat-item w-full ${
-                    activeCat === cat ? "cat-item-active" : "cat-item-idle"
-                  }`}
-                >
-                  <Icon
-                    className="w-[22px] h-[22px]"
-                    strokeWidth={activeCat === cat ? 2 : 1.7}
-                  />
-                  {cat}
-                </button>
-              );
-            })}
-          </aside>
+                {cat}
+              </button>
+            );
+          })}
+        </aside>
 
-          {/* Continuous sections (page scrolls) */}
-          <main className="flex-1 pl-4 pr-4 pt-3 pb-40 min-w-0 border-l border-border/70">
-            {sections.map(({ cat, items }) => (
+        {/* Middle column — search results, or the continuous category sections */}
+        <main
+          className={`flex-1 min-w-0 pb-40 lg:pb-16 ${
+            searching
+              ? "px-5 lg:px-8 pt-20 lg:pt-6 lg:border-l lg:border-border/70"
+              : "pl-4 pr-4 lg:pl-8 lg:pr-8 pt-3 lg:pt-6 border-l border-border/70"
+          }`}
+        >
+          {searching ? (
+            <>
+              <p className="text-muted text-sm mb-3">
+                {searchResults.length} result
+                {searchResults.length === 1 ? "" : "s"} for “{query}”
+              </p>
+              {searchResults.length === 0 ? (
+                <div className="text-center py-20 text-muted">
+                  <p className="text-4xl mb-2">🔍</p>
+                  <p>No items found.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 lg:gap-x-8 lg:gap-y-12">
+                  {searchResults.map((item, i) => (
+                    <ProductCard
+                      key={item.id}
+                      item={item}
+                      index={i}
+                      qty={mounted ? qtyOf(item.id) : 0}
+                      onOpen={openDetail}
+                      onAdd={quickAdd}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            sections.map(({ cat, items }) => (
               <section
                 key={cat}
                 data-cat={cat}
                 ref={(el) => {
                   sectionRefs.current[cat] = el;
                 }}
-                className="mb-9 scroll-mt-[96px]"
+                className="mb-9 lg:mb-12 scroll-mt-[96px] lg:scroll-mt-[32px]"
               >
-                <h2 className="text-[15px] font-semibold mb-4 flex items-center gap-2">
-                  <span className="w-1 h-4 rounded-full bg-brand" />
+                <h2 className="text-[15px] lg:text-xl font-semibold mb-4 flex items-center gap-2">
+                  <span className="w-1 h-4 lg:h-5 rounded-full bg-brand" />
                   {cat}
                 </h2>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-8">
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 lg:gap-x-8 lg:gap-y-12">
                   {items.map((item, i) => (
                     <ProductCard
                       key={item.id}
@@ -302,14 +310,33 @@ export default function MenuBrowser({
                   ))}
                 </div>
               </section>
-            ))}
-          </main>
-        </div>
-      )}
+            ))
+          )}
+        </main>
 
-      {/* Floating cart bar */}
+        {/* Right column (desktop) — search bar above the always-visible order card */}
+        <aside className="hidden lg:block lg:w-[360px] xl:w-[400px] shrink-0 sticky self-start top-0 pt-4 pr-6 pl-3">
+          <div className="flex items-center gap-2 bg-surface-muted rounded-full px-4 py-3 mb-4">
+            <Search className="w-5 h-5 text-muted -scale-x-100" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search drinks, pastries…"
+              className="flex-1 bg-transparent outline-none text-sm placeholder:text-muted"
+            />
+            {query && (
+              <button onClick={() => setQuery("")} aria-label="Clear search">
+                <X className="w-4 h-4 text-muted" />
+              </button>
+            )}
+          </div>
+          <OrderSummaryPanel table={table} variant="rail" />
+        </aside>
+      </div>
+
+      {/* Floating cart bar — mobile only; desktop uses the persistent panel */}
       {cartCount > 0 && (
-        <div className="fixed bottom-[60px] inset-x-0 z-20 px-4 pb-2">
+        <div className="lg:hidden fixed bottom-[60px] inset-x-0 z-20 px-4 pb-2">
           <Link
             href={`/t/${table.id}/cart`}
             className="btn-brand max-w-md mx-auto flex items-center justify-between shadow-xl"
@@ -389,9 +416,9 @@ function ProductCard({
           <button
             onClick={() => onAdd(item)}
             aria-label={`Add ${item.name}`}
-            className="absolute bottom-0 right-3 w-9 h-9 rounded-full bg-accent text-white flex items-center justify-center shadow-lg active:scale-90 transition-transform"
+            className="absolute bottom-0 right-3 w-9 h-9 lg:w-11 lg:h-11 rounded-full bg-accent text-white flex items-center justify-center shadow-lg active:scale-90 transition-transform"
           >
-            <Plus className="w-5 h-5" strokeWidth={2.5} />
+            <Plus className="w-5 h-5 lg:w-6 lg:h-6" strokeWidth={2.5} />
           </button>
         )}
       </div>
@@ -402,11 +429,11 @@ function ProductCard({
       <button
         onClick={() => !soldOut && onOpen(item)}
         disabled={soldOut}
-        className="font-semibold text-sm leading-snug line-clamp-2"
+        className="font-semibold text-sm lg:text-base leading-snug line-clamp-2"
       >
         {item.name}
       </button>
-      <p className="text-foreground/90 font-medium text-sm mt-1">
+      <p className="text-foreground/90 font-medium text-sm lg:text-base mt-1">
         {soldOut ? "Sold out" : peso(item.price)}
       </p>
     </motion.div>

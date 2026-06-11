@@ -75,13 +75,14 @@ export default function ProductDetail({
         <span className="font-bold truncate">{item.name}</span>
       </div>
 
-      <main className="flex-1 overflow-y-auto px-5 pb-40">
+      <main className="flex-1 overflow-y-auto px-5 lg:px-10 pb-40 lg:pb-32">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-12 lg:max-w-5xl lg:mx-auto lg:items-start lg:pt-6">
         {/* Floating hero */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="relative w-60 h-60 mx-auto my-4 flex items-center justify-center"
+          className="relative w-60 h-60 lg:w-full lg:h-auto lg:aspect-square mx-auto my-4 lg:my-0 lg:sticky lg:top-24 flex items-center justify-center"
         >
           <div className="absolute inset-0 halo" />
           {item.imageUrl && (
@@ -90,7 +91,7 @@ export default function ProductDetail({
                 src={item.imageUrl}
                 alt={item.name}
                 fill
-                sizes="240px"
+                sizes="(max-width:1024px) 240px, 420px"
                 className="object-cover"
                 priority
               />
@@ -98,16 +99,18 @@ export default function ProductDetail({
           )}
         </motion.div>
 
-        <div className="text-center mb-7">
+        {/* Right column: title, description, options */}
+        <div>
+        <div className="text-center lg:text-left mb-7">
           {item.seriesLabel && <p className="series-label">{item.seriesLabel}</p>}
-          <h1 className="text-2xl font-semibold mt-1">{item.name}</h1>
-          <p className="text-muted text-sm mt-2 max-w-xs mx-auto">
+          <h1 className="text-2xl lg:text-4xl font-semibold mt-1">{item.name}</h1>
+          <p className="text-muted text-sm lg:text-base mt-2 max-w-xs lg:max-w-none mx-auto lg:mx-0">
             {item.description}
           </p>
         </div>
 
         {/* Option groups */}
-        <div className="space-y-6 max-w-md mx-auto">
+        <div className="space-y-6 max-w-md lg:max-w-none mx-auto lg:mx-0">
           {(item.options ?? []).map((group) => {
             const cur = picks[group.id] ?? [];
             return (
@@ -133,7 +136,7 @@ export default function ProductDetail({
                             ? toggleSingle(group.id, choice.id)
                             : toggleMulti(group.id, choice.id, group.max)
                         }
-                        className={`opt-card ${on ? "opt-card-on" : "opt-card-off"}`}
+                        className={`opt-card lg:px-5 lg:py-4 ${on ? "opt-card-on" : "opt-card-off"}`}
                       >
                         <span className="block font-semibold text-sm">
                           {choice.label}
@@ -156,11 +159,15 @@ export default function ProductDetail({
             );
           })}
         </div>
+        </div>
+        {/* end right column */}
+        </div>
+        {/* end two-column grid */}
       </main>
 
       {/* Sticky add bar */}
-      <div className="fixed bottom-0 inset-x-0 z-20 bg-surface border-t border-border px-4 py-3">
-        <div className="max-w-md mx-auto flex items-center gap-3">
+      <div className="fixed bottom-0 inset-x-0 z-20 bg-surface border-t border-border px-4 py-3 lg:py-5">
+        <div className="kiosk-container flex items-center gap-3">
           <div className="flex items-center gap-2 bg-surface-muted rounded-full px-1 py-1">
             <button
               onClick={() => setQty((x) => Math.max(1, x - 1))}

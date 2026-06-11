@@ -94,8 +94,8 @@ export default function HomeView({
   }, [tip, pop]);
 
   return (
-    <div className="flex-1 flex flex-col bg-background">
-      <main className="flex-1 max-w-md mx-auto w-full px-5 pb-6">
+    <div className="flex-1 flex flex-col bg-background lg:pl-24 xl:pl-28">
+      <main className="flex-1 kiosk-container px-5 lg:px-8 pb-6">
         {/* Greeting + search (scrolls with the page) */}
         <div className="pt-8 pb-2">
           <motion.div
@@ -106,7 +106,7 @@ export default function HomeView({
             className="flex items-center justify-between mb-3"
           >
             <div>
-              <p className="text-2xl font-semibold leading-tight text-foreground">
+              <p className="text-2xl lg:text-4xl font-semibold leading-tight text-foreground">
                 Hello, friend
               </p>
               <p className="text-muted text-sm mt-1">
@@ -176,30 +176,30 @@ export default function HomeView({
           initial="hidden"
           animate="show"
           custom={3}
-          className="grid grid-cols-2 gap-3 mt-6 mb-7"
+          className="grid grid-cols-2 gap-3 lg:gap-6 mt-6 mb-7"
         >
           <Link
             href={menuHref}
-            className="card p-5 flex flex-col items-center text-center active:scale-95 transition-transform"
+            className="card p-5 lg:p-8 flex flex-col items-center text-center active:scale-95 transition-transform"
           >
-            <span className="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center mb-2">
-              <UtensilsCrossed className="w-6 h-6 text-brand" />
+            <span className="w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-brand-light flex items-center justify-center mb-2">
+              <UtensilsCrossed className="w-6 h-6 lg:w-8 lg:h-8 text-brand" />
             </span>
-            <span className="font-bold">Dine-In</span>
-            <span className="text-muted text-xs mt-0.5">Served to {table.label}</span>
+            <span className="font-bold lg:text-lg">Dine-In</span>
+            <span className="text-muted text-xs lg:text-sm mt-0.5">Served to {table.label}</span>
           </Link>
           <div
-            className="card p-5 flex flex-col items-center text-center opacity-70 cursor-not-allowed relative"
+            className="card p-5 lg:p-8 flex flex-col items-center text-center opacity-70 cursor-not-allowed relative"
             aria-disabled
           >
             <span className="absolute top-3 right-3 bg-accent/15 text-accent text-[10px] font-bold rounded-full px-2 py-0.5">
               Soon
             </span>
-            <span className="w-12 h-12 rounded-full bg-surface-muted flex items-center justify-center mb-2">
-              <Bike className="w-6 h-6 text-muted" />
+            <span className="w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-surface-muted flex items-center justify-center mb-2">
+              <Bike className="w-6 h-6 lg:w-8 lg:h-8 text-muted" />
             </span>
-            <span className="font-bold">Delivery</span>
-            <span className="text-muted text-xs mt-0.5">Coming soon</span>
+            <span className="font-bold lg:text-lg">Delivery</span>
+            <span className="text-muted text-xs lg:text-sm mt-0.5">Coming soon</span>
           </div>
         </motion.div>
 
@@ -211,8 +211,8 @@ export default function HomeView({
           custom={4}
           className="mb-7"
         >
-          <h3 className="font-semibold text-base mb-3">Categories</h3>
-          <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-5 px-5">
+          <h3 className="font-semibold text-base lg:text-xl mb-3">Categories</h3>
+          <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-5 px-5 lg:grid lg:grid-cols-6 xl:grid-cols-8 lg:gap-4 lg:overflow-visible lg:mx-0 lg:px-0">
             {categories.map((cat) => {
               const Icon = CATEGORY_ICON[cat] ?? Coffee;
               return (
@@ -221,10 +221,10 @@ export default function HomeView({
                   href={`${menuHref}?c=${encodeURIComponent(cat)}`}
                   className="flex flex-col items-center gap-1.5 shrink-0"
                 >
-                  <span className="w-16 h-16 rounded-2xl bg-surface-muted flex items-center justify-center text-brand">
-                    <Icon className="w-6 h-6" strokeWidth={1.7} />
+                  <span className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-surface-muted flex items-center justify-center text-brand">
+                    <Icon className="w-6 h-6 lg:w-8 lg:h-8" strokeWidth={1.7} />
                   </span>
-                  <span className="text-[11px] font-medium text-muted text-center w-16 leading-tight">
+                  <span className="text-[11px] lg:text-xs font-medium text-muted text-center w-16 lg:w-auto leading-tight">
                     {cat}
                   </span>
                 </Link>
@@ -242,7 +242,7 @@ export default function HomeView({
             custom={5}
           >
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-semibold text-base">Crowd favorites</h3>
+              <h3 className="font-semibold text-base lg:text-xl">Crowd favorites</h3>
               <Link
                 href={menuHref}
                 className="text-brand text-sm font-semibold flex items-center"
@@ -250,12 +250,12 @@ export default function HomeView({
                 See all <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
-            <div className="flex gap-4 overflow-x-auto no-scrollbar -mx-5 px-5 pb-2">
+            <div className="flex gap-4 overflow-x-auto no-scrollbar -mx-5 px-5 pb-2 lg:grid lg:grid-cols-5 xl:grid-cols-6 lg:gap-6 lg:overflow-visible lg:mx-0 lg:px-0">
               {featured.map((item) => (
                 <Link
                   key={item.id}
                   href={`/t/${table.id}/item/${item.id}`}
-                  className="w-36 shrink-0 active:scale-95 transition-transform"
+                  className="w-36 lg:w-auto shrink-0 active:scale-95 transition-transform"
                 >
                   <div className="relative w-full aspect-square mb-2 flex items-center justify-center">
                     <div className="absolute inset-0 halo" />
@@ -274,10 +274,10 @@ export default function HomeView({
                   {item.seriesLabel && (
                     <p className="series-label text-center">{item.seriesLabel}</p>
                   )}
-                  <p className="font-semibold text-sm leading-snug line-clamp-1 text-center">
+                  <p className="font-semibold text-sm lg:text-base leading-snug line-clamp-1 text-center">
                     {item.name}
                   </p>
-                  <p className="text-foreground/90 font-medium text-sm mt-0.5 text-center">
+                  <p className="text-foreground/90 font-medium text-sm lg:text-base mt-0.5 text-center">
                     {peso(item.price)}
                   </p>
                 </Link>

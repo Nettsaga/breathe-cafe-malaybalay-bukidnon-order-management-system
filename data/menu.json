@@ -10,21 +10,75 @@
     "seriesLabel": "BEST SELLER",
     "featured": true,
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s75", "label": "75%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]},
-      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 3, "choices": [
-        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 },
-        { "id": "pearls", "label": "Tapioca Pearls", "priceDelta": 20 },
-        { "id": "oat-milk", "label": "Oat Milk", "priceDelta": 30 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s75",
+            "label": "75%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 3,
+        "choices": [
+          {
+            "id": "extra-shot",
+            "label": "Extra Espresso Shot",
+            "priceDelta": 35
+          },
+          {
+            "id": "pearls",
+            "label": "Tapioca Pearls",
+            "priceDelta": 20
+          },
+          {
+            "id": "oat-milk",
+            "label": "Oat Milk",
+            "priceDelta": 30
+          }
+        ]
+      }
     ]
   },
   {
@@ -34,24 +88,74 @@
     "price": 170,
     "category": "Signature",
     "imageUrl": "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=70",
-    "available": true,
+    "available": false,
     "seriesLabel": "FAN FAVORITE",
     "featured": true,
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]},
-      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 3, "choices": [
-        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 },
-        { "id": "pearls", "label": "Tapioca Pearls", "priceDelta": 20 },
-        { "id": "extra-caramel", "label": "Extra Caramel", "priceDelta": 15 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 3,
+        "choices": [
+          {
+            "id": "extra-shot",
+            "label": "Extra Espresso Shot",
+            "priceDelta": 35
+          },
+          {
+            "id": "pearls",
+            "label": "Tapioca Pearls",
+            "priceDelta": 20
+          },
+          {
+            "id": "extra-caramel",
+            "label": "Extra Caramel",
+            "priceDelta": 15
+          }
+        ]
+      }
     ]
   },
   {
@@ -64,15 +168,47 @@
     "available": true,
     "seriesLabel": "NEW",
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      }
     ]
   },
   {
@@ -85,10 +221,24 @@
     "available": true,
     "seriesLabel": "THE CLASSICS",
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Single", "priceDelta": 0 },
-        { "id": "double", "label": "Double", "priceDelta": 35 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Single",
+            "priceDelta": 0
+          },
+          {
+            "id": "double",
+            "label": "Double",
+            "priceDelta": 35
+          }
+        ]
+      }
     ]
   },
   {
@@ -100,19 +250,65 @@
     "imageUrl": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=600&q=70",
     "available": true,
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]},
-      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 3, "choices": [
-        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 },
-        { "id": "oat-milk", "label": "Oat Milk", "priceDelta": 30 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 3,
+        "choices": [
+          {
+            "id": "extra-shot",
+            "label": "Extra Espresso Shot",
+            "priceDelta": 35
+          },
+          {
+            "id": "oat-milk",
+            "label": "Oat Milk",
+            "priceDelta": 30
+          }
+        ]
+      }
     ]
   },
   {
@@ -124,19 +320,65 @@
     "imageUrl": "https://images.unsplash.com/photo-1561882468-9110e03e0f78?auto=format&fit=crop&w=600&q=70",
     "available": true,
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]},
-      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 3, "choices": [
-        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 },
-        { "id": "oat-milk", "label": "Oat Milk", "priceDelta": 30 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 3,
+        "choices": [
+          {
+            "id": "extra-shot",
+            "label": "Extra Espresso Shot",
+            "priceDelta": 35
+          },
+          {
+            "id": "oat-milk",
+            "label": "Oat Milk",
+            "priceDelta": 30
+          }
+        ]
+      }
     ]
   },
   {
@@ -148,13 +390,37 @@
     "imageUrl": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=600&q=70",
     "available": true,
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 2, "choices": [
-        { "id": "marshmallows", "label": "Marshmallows", "priceDelta": 15 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 2,
+        "choices": [
+          {
+            "id": "marshmallows",
+            "label": "Marshmallows",
+            "priceDelta": 15
+          }
+        ]
+      }
     ]
   },
   {
@@ -166,18 +432,60 @@
     "imageUrl": "https://images.unsplash.com/photo-1517959105821-eaf2591984ca?auto=format&fit=crop&w=600&q=70",
     "available": true,
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]},
-      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 2, "choices": [
-        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 2,
+        "choices": [
+          {
+            "id": "extra-shot",
+            "label": "Extra Espresso Shot",
+            "priceDelta": 35
+          }
+        ]
+      }
     ]
   },
   {
@@ -189,19 +497,65 @@
     "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=70",
     "available": true,
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]},
-      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 3, "choices": [
-        { "id": "extra-shot", "label": "Extra Espresso Shot", "priceDelta": 35 },
-        { "id": "oat-milk", "label": "Oat Milk", "priceDelta": 30 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 3,
+        "choices": [
+          {
+            "id": "extra-shot",
+            "label": "Extra Espresso Shot",
+            "priceDelta": 35
+          },
+          {
+            "id": "oat-milk",
+            "label": "Oat Milk",
+            "priceDelta": 30
+          }
+        ]
+      }
     ]
   },
   {
@@ -213,15 +567,47 @@
     "imageUrl": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=600&q=70",
     "available": true,
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      }
     ]
   },
   {
@@ -235,19 +621,65 @@
     "seriesLabel": "LUSH TROPICS",
     "featured": true,
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]},
-      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 2, "choices": [
-        { "id": "pearls", "label": "Tapioca Pearls", "priceDelta": 20 },
-        { "id": "oat-milk", "label": "Oat Milk", "priceDelta": 30 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 2,
+        "choices": [
+          {
+            "id": "pearls",
+            "label": "Tapioca Pearls",
+            "priceDelta": 20
+          },
+          {
+            "id": "oat-milk",
+            "label": "Oat Milk",
+            "priceDelta": 30
+          }
+        ]
+      }
     ]
   },
   {
@@ -260,15 +692,47 @@
     "available": true,
     "seriesLabel": "GOLDEN DRIZZLE",
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      }
     ]
   },
   {
@@ -281,15 +745,47 @@
     "available": true,
     "seriesLabel": "MATCHA CRUNCH",
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      }
     ]
   },
   {
@@ -302,19 +798,65 @@
     "available": true,
     "seriesLabel": "JOYFUL PUNCH",
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]},
-      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 2, "choices": [
-        { "id": "pearls", "label": "Tapioca Pearls", "priceDelta": 20 },
-        { "id": "nata", "label": "Extra Nata", "priceDelta": 15 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 2,
+        "choices": [
+          {
+            "id": "pearls",
+            "label": "Tapioca Pearls",
+            "priceDelta": 20
+          },
+          {
+            "id": "nata",
+            "label": "Extra Nata",
+            "priceDelta": 15
+          }
+        ]
+      }
     ]
   },
   {
@@ -327,13 +869,37 @@
     "available": true,
     "seriesLabel": "CHEERFUL",
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "addons", "name": "Add-ons", "type": "multi", "max": 2, "choices": [
-        { "id": "pearls", "label": "Tapioca Pearls", "priceDelta": 20 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 2,
+        "choices": [
+          {
+            "id": "pearls",
+            "label": "Tapioca Pearls",
+            "priceDelta": 20
+          }
+        ]
+      }
     ]
   },
   {
@@ -346,15 +912,47 @@
     "available": true,
     "seriesLabel": "SUNRUSH",
     "options": [
-      { "id": "size", "name": "Size", "type": "single", "required": true, "choices": [
-        { "id": "regular", "label": "Regular", "priceDelta": 0 },
-        { "id": "large", "label": "Large", "priceDelta": 25 }
-      ]},
-      { "id": "sugar", "name": "Sugar Level", "type": "single", "required": true, "choices": [
-        { "id": "s100", "label": "100%", "priceDelta": 0 },
-        { "id": "s50", "label": "50%", "priceDelta": 0 },
-        { "id": "s0", "label": "No Sugar", "priceDelta": 0 }
-      ]}
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      }
     ]
   },
   {
@@ -458,5 +1056,239 @@
     "category": "Meals",
     "imageUrl": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=70",
     "available": true
+  },
+  {
+    "id": "brown-sugar-latte",
+    "name": "Brown Sugar Oat Latte",
+    "description": "Espresso and oat milk with caramelized brown sugar.",
+    "price": 165,
+    "category": "Signature",
+    "imageUrl": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "HOUSE POUR",
+    "options": [
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 2,
+        "choices": [
+          {
+            "id": "extra-shot",
+            "label": "Extra Espresso Shot",
+            "priceDelta": 35
+          },
+          {
+            "id": "pearls",
+            "label": "Tapioca Pearls",
+            "priceDelta": 20
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "iced-vanilla-latte",
+    "name": "Iced Vanilla Latte",
+    "description": "Cold milk, espresso, and sweet vanilla over ice.",
+    "price": 150,
+    "category": "Iced Coffee",
+    "imageUrl": "https://images.unsplash.com/photo-1561882468-9110e03e0f78?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "options": [
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "matcha-strawberry-latte",
+    "name": "Matcha Strawberry Latte",
+    "description": "Creamy matcha layered with sweet strawberry.",
+    "price": 160,
+    "category": "Matcha Series",
+    "imageUrl": "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "BERRY BLISS",
+    "options": [
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "sugar",
+        "name": "Sugar Level",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "s100",
+            "label": "100%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s50",
+            "label": "50%",
+            "priceDelta": 0
+          },
+          {
+            "id": "s0",
+            "label": "No Sugar",
+            "priceDelta": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lychee-frappe",
+    "name": "Lychee Frappé",
+    "description": "Blended icy lychee with a cloud of cream on top.",
+    "price": 160,
+    "category": "Fruit Tea",
+    "imageUrl": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "CHEERFUL COMFORT",
+    "options": [
+      {
+        "id": "size",
+        "name": "Size",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "regular",
+            "label": "Regular",
+            "priceDelta": 0
+          },
+          {
+            "id": "large",
+            "label": "Large",
+            "priceDelta": 25
+          }
+        ]
+      },
+      {
+        "id": "addons",
+        "name": "Add-ons",
+        "type": "multi",
+        "max": 2,
+        "choices": [
+          {
+            "id": "pearls",
+            "label": "Tapioca Pearls",
+            "priceDelta": 20
+          },
+          {
+            "id": "nata",
+            "label": "Extra Nata",
+            "priceDelta": 15
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "basque-cheesecake",
+    "name": "Basque Burnt Cheesecake",
+    "description": "Caramelized top, soft and creamy center.",
+    "price": 165,
+    "category": "Cakes",
+    "imageUrl": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=70",
+    "available": true,
+    "seriesLabel": "RICH & CREAMY"
   }
 ]

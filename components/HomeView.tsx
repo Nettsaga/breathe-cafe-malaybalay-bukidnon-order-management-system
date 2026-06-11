@@ -81,7 +81,7 @@ export default function HomeView({
             href={`${menuHref}?q=`}
             className="flex items-center gap-2 bg-surface-muted rounded-full px-4 py-3 text-muted mb-5"
           >
-            <Search className="w-5 h-5" />
+            <Search className="w-5 h-5 -scale-x-100" />
             <span className="text-sm">Search drinks, pastries…</span>
           </Link>
         </motion.div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import { Soup, CircleCheck, Wallet, Receipt, type LucideIcon } from "lucide-react";
 import { peso, shortTime } from "@/lib/format";
 import type { MenuItem, Order, OrderStatus, Table } from "@/lib/types";
 import type { OrderEvent } from "@/lib/events";
@@ -114,19 +115,27 @@ function OrdersDashboard({ initialOrders }: { initialOrders: Order[] }) {
 
   const stats = useMemo(() => {
     const paid = orders.filter((o) => o.paymentStatus === "paid");
+    const revenue = paid.reduce((sum, o) => sum + o.total, 0);
     return {
       active: paid.filter((o) => o.status !== "completed").length,
       completed: paid.filter((o) => o.status === "completed").length,
-      revenue: paid.reduce((sum, o) => sum + o.total, 0),
+      revenue,
+      avg: paid.length ? Math.round(revenue / paid.length) : 0,
     };
   }, [orders]);
 
   return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-3">
-        <StatCard label="Active" value={String(stats.active)} />
-        <StatCard label="Completed" value={String(stats.completed)} />
-        <StatCard label="Revenue (paid)" value={peso(stats.revenue)} />
+    <div className="space-y-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+        <StatCard label="Active" value={String(stats.active)} Icon={Soup} />
+        <StatCard
+          label="Completed"
+          value={String(stats.completed)}
+          Icon={CircleCheck}
+          accent="text-success"
+        />
+        <StatCard label="Revenue (paid)" value={peso(stats.revenue)} Icon={Wallet} />
+        <StatCard label="Avg order" value={peso(stats.avg)} Icon={Receipt} />
       </div>
 
       {sorted.length === 0 ? (
@@ -182,11 +191,26 @@ function OrdersDashboard({ initialOrders }: { initialOrders: Order[] }) {
   );
 }
 
-function StatCard({ label, value }: { label: string; value: string }) {
+function StatCard({
+  label,
+  value,
+  Icon,
+  accent = "text-brand",
+}: {
+  label: string;
+  value: string;
+  Icon: LucideIcon;
+  accent?: string;
+}) {
   return (
-    <div className="card p-3 text-center">
-      <p className="text-lg font-bold text-brand">{value}</p>
-      <p className="text-muted text-xs">{label}</p>
+    <div className="card p-4 lg:p-5 flex items-center gap-3">
+      <span className="w-11 h-11 rounded-2xl bg-surface-muted flex items-center justify-center shrink-0">
+        <Icon className={`w-6 h-6 ${accent}`} strokeWidth={1.8} />
+      </span>
+      <div className="min-w-0">
+        <p className={`text-xl lg:text-2xl font-bold leading-none ${accent}`}>{value}</p>
+        <p className="text-muted text-xs mt-1">{label}</p>
+      </div>
     </div>
   );
 }
@@ -572,45 +596,44 @@ function QrManager({ tables }: { tables: Table[] }) {
   const qrSrc = `/api/qr/${selected.id}`;
 
   return (
-    <div className="grid md:grid-cols-[1fr_auto] gap-6">
+    <div className="max-w-2xl mx-auto">
       {/* Table picker */}
-      <div>
-        <p className="text-muted text-sm mb-2">
-          Select a table to preview &amp; download its printable QR code.
-        </p>
-        <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
-          {tables.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setSelected(t)}
-              className={`chip text-xs justify-center ${
-                selected.id === t.id ? "chip-active" : "chip-idle"
-              }`}
-            >
-              {t.label.replace("Table ", "")}
-            </button>
-          ))}
-        </div>
+      <p className="text-muted text-sm mb-3 text-center">
+        Select a table to preview &amp; download its printable QR code.
+      </p>
+      <div className="grid grid-cols-4 sm:grid-cols-6 gap-2.5 mb-8">
+        {tables.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => setSelected(t)}
+            className={`chip justify-center py-2.5 text-sm ${
+              selected.id === t.id ? "chip-active" : "chip-idle"
+            }`}
+          >
+            {t.label.replace("Table ", "")}
+          </button>
+        ))}
       </div>
 
-      {/* QR preview */}
-      <div className="card p-5 flex flex-col items-center self-start">
-        <p className="font-bold mb-3">{selected.label}</p>
+      {/* QR preview — centered, large */}
+      <div className="card p-6 lg:p-8 flex flex-col items-center max-w-sm mx-auto">
+        <p className="font-bold text-lg">{selected.label}</p>
+        <p className="text-muted text-xs mb-5">Scan to open the dine-in menu</p>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={qrSrc}
           alt={`QR code for ${selected.label}`}
-          width={220}
-          height={220}
-          className="rounded-2xl border border-border"
+          width={256}
+          height={256}
+          className="w-64 h-64 rounded-2xl border border-border"
         />
-        <p className="text-muted text-xs mt-3 break-all text-center max-w-[220px]">
+        <p className="text-muted text-xs mt-4 break-all text-center">
           /t/{selected.id}
         </p>
         <a
           href={qrSrc}
           download={`${selected.id}-qr.png`}
-          className="btn-brand mt-4 text-sm py-2.5"
+          className="btn-brand mt-5 w-full text-center text-sm py-3"
         >
           Download PNG
         </a>

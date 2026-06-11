@@ -10,7 +10,8 @@ import type { Order } from "./types";
 
 export type OrderEvent =
   | { type: "created"; order: Order }
-  | { type: "updated"; order: Order };
+  | { type: "updated"; order: Order }
+  | { type: "deleted"; orderId: string };
 
 // Survive Next.js hot-reload by stashing the emitter on globalThis.
 const globalForEvents = globalThis as unknown as {

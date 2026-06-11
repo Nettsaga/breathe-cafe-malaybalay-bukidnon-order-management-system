@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { updateMenuItem } from "@/lib/db";
+import { deleteMenuItem, updateMenuItem } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
 interface PatchBody {
   available?: unknown;
   price?: unknown;
+  imageUrl?: unknown;
 }
 
-// PATCH /api/menu/[id] — admin toggles availability or edits price.
+// PATCH /api/menu/[id] — admin toggles availability, edits price, or sets image.
 export async function PATCH(
   req: NextRequest,
   context: { params: Promise<{ id: string }> }
@@ -22,7 +23,7 @@ export async function PATCH(
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const patch: { available?: boolean; price?: number } = {};
+  const patch: { available?: boolean; price?: number; imageUrl?: string } = {};
 
   if (body.available !== undefined) {
     if (typeof body.available !== "boolean") {
@@ -37,6 +38,12 @@ export async function PATCH(
     }
     patch.price = Math.round(price);
   }
+  if (body.imageUrl !== undefined) {
+    if (typeof body.imageUrl !== "string" || body.imageUrl.length === 0) {
+      return NextResponse.json({ error: "Invalid imageUrl" }, { status: 400 });
+    }
+    patch.imageUrl = body.imageUrl;
+  }
 
   if (Object.keys(patch).length === 0) {
     return NextResponse.json({ error: "Nothing to update" }, { status: 400 });
@@ -47,4 +54,17 @@ export async function PATCH(
     return NextResponse.json({ error: "Menu item not found" }, { status: 404 });
   }
   return NextResponse.json(updated);
+}
+
+// DELETE /api/menu/[id] — admin removes a product from the menu.
+export async function DELETE(
+  _req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
+  const ok = await deleteMenuItem(id);
+  if (!ok) {
+    return NextResponse.json({ error: "Menu item not found" }, { status: 404 });
+  }
+  return NextResponse.json({ ok: true });
 }

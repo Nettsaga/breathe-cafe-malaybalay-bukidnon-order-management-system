@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { House, CupSoda, ShoppingBag, Gift } from "lucide-react";
+import { House, CupSoda, ShoppingBag, Armchair } from "lucide-react";
 import { useCart } from "@/lib/store";
 
 // Persistent bottom navigation for the customer screens, scoped to the table.
@@ -31,6 +31,12 @@ export default function BottomNav({ tableId }: { tableId: string }) {
       match: (p: string) => p.startsWith(`${base}/cart`),
       badge: true,
     },
+    {
+      href: `${base}/you`,
+      label: "Table",
+      Icon: Armchair,
+      match: (p: string) => p.startsWith(`${base}/you`),
+    },
   ];
 
   return (
@@ -56,11 +62,6 @@ export default function BottomNav({ tableId }: { tableId: string }) {
             </Link>
           );
         })}
-        {/* Coming-soon tab */}
-        <div className="flex flex-col items-center gap-1 py-2.5 text-[11px] font-semibold text-muted/40 cursor-not-allowed">
-          <Gift className="w-[22px] h-[22px]" strokeWidth={1.8} />
-          Rewards
-        </div>
       </div>
     </nav>
   );

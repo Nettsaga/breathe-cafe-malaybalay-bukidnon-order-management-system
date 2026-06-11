@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getOrder, updateOrder } from "@/lib/db";
+import { deleteOrder, getOrder, updateOrder } from "@/lib/db";
 import { emitOrderEvent } from "@/lib/events";
 import type { Order, OrderStatus, PaymentStatus } from "@/lib/types";
 
@@ -76,4 +76,19 @@ export async function PATCH(
 
   emitOrderEvent({ type: "updated", order: updated });
   return NextResponse.json(updated);
+}
+
+// DELETE /api/orders/[id] — admin removes an order (e.g. a mistaken or test one).
+export async function DELETE(
+  _req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
+  const ok = await deleteOrder(id);
+  if (!ok) {
+    return NextResponse.json({ error: "Order not found" }, { status: 404 });
+  }
+
+  emitOrderEvent({ type: "deleted", orderId: id });
+  return NextResponse.json({ ok: true });
 }

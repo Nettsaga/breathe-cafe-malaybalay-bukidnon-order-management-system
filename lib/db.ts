@@ -56,7 +56,7 @@ export function getMenu(): Promise<MenuItem[]> {
 
 export async function updateMenuItem(
   id: string,
-  patch: Partial<Pick<MenuItem, "price" | "available">>
+  patch: Partial<Pick<MenuItem, "price" | "available" | "imageUrl">>
 ): Promise<MenuItem | null> {
   return serialize(FILES.menu, async () => {
     const menu = await readJson<MenuItem[]>(FILES.menu, []);
@@ -65,6 +65,17 @@ export async function updateMenuItem(
     menu[idx] = { ...menu[idx], ...patch };
     await writeJson(FILES.menu, menu);
     return menu[idx];
+  });
+}
+
+export async function deleteMenuItem(id: string): Promise<boolean> {
+  return serialize(FILES.menu, async () => {
+    const menu = await readJson<MenuItem[]>(FILES.menu, []);
+    const idx = menu.findIndex((m) => m.id === id);
+    if (idx === -1) return false;
+    menu.splice(idx, 1);
+    await writeJson(FILES.menu, menu);
+    return true;
   });
 }
 
@@ -116,5 +127,16 @@ export async function updateOrder(
     orders[idx] = { ...orders[idx], ...patch, updatedAt: new Date().toISOString() };
     await writeJson(FILES.orders, orders);
     return orders[idx];
+  });
+}
+
+export async function deleteOrder(id: string): Promise<boolean> {
+  return serialize(FILES.orders, async () => {
+    const orders = await readJson<Order[]>(FILES.orders, []);
+    const idx = orders.findIndex((o) => o.id === id);
+    if (idx === -1) return false;
+    orders.splice(idx, 1);
+    await writeJson(FILES.orders, orders);
+    return true;
   });
 }

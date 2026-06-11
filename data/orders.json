@@ -291,5 +291,100 @@
     "paymentStatus": "unpaid",
     "createdAt": "2026-06-11T21:05:35.309Z",
     "updatedAt": "2026-06-11T21:05:35.309Z"
+  },
+  {
+    "id": "BRC-W889E",
+    "tableId": "table-7",
+    "tableLabel": "Table 7",
+    "items": [
+      {
+        "menuItemId": "ube-halaya-cake",
+        "name": "Classic Ube Halaya Cake",
+        "price": 170,
+        "qty": 1
+      },
+      {
+        "menuItemId": "iced-cafe-latte",
+        "name": "Iced Cafe Latte",
+        "price": 150,
+        "qty": 1,
+        "optionsLabel": "Regular · 100%"
+      }
+    ],
+    "total": 320,
+    "status": "pending",
+    "paymentStatus": "unpaid",
+    "createdAt": "2026-06-11T21:50:38.850Z",
+    "updatedAt": "2026-06-11T21:50:38.850Z"
+  },
+  {
+    "id": "BRC-E6C6M",
+    "tableId": "table-7",
+    "tableLabel": "Table 7",
+    "items": [
+      {
+        "menuItemId": "ube-halaya-cake",
+        "name": "Classic Ube Halaya Cake",
+        "price": 170,
+        "qty": 1
+      },
+      {
+        "menuItemId": "iced-cafe-latte",
+        "name": "Iced Cafe Latte",
+        "price": 150,
+        "qty": 1,
+        "optionsLabel": "Regular · 100%"
+      }
+    ],
+    "total": 320,
+    "status": "pending",
+    "paymentStatus": "unpaid",
+    "createdAt": "2026-06-11T21:57:45.495Z",
+    "updatedAt": "2026-06-11T21:57:45.495Z"
+  },
+  {
+    "id": "BRC-NZ8YG",
+    "tableId": "table-1",
+    "tableLabel": "Table 1",
+    "items": [
+      {
+        "menuItemId": "iced-spanish-latte",
+        "name": "Iced Spanish Latte",
+        "price": 160,
+        "qty": 1,
+        "optionsLabel": "Regular · 100%"
+      }
+    ],
+    "total": 160,
+    "status": "pending",
+    "paymentStatus": "unpaid",
+    "createdAt": "2026-06-11T21:59:46.151Z",
+    "updatedAt": "2026-06-11T21:59:46.151Z"
+  },
+  {
+    "id": "BRC-ZBQFR",
+    "tableId": "table-1",
+    "tableLabel": "Table 1",
+    "items": [
+      {
+        "menuItemId": "iced-spanish-latte",
+        "name": "Iced Spanish Latte",
+        "price": 160,
+        "qty": 1,
+        "optionsLabel": "Regular · 100%"
+      },
+      {
+        "menuItemId": "sea-salt-latte",
+        "name": "Sea Salt Cream Latte",
+        "price": 165,
+        "qty": 1,
+        "optionsLabel": "Regular · 100%"
+      }
+    ],
+    "total": 325,
+    "status": "pending",
+    "paymentStatus": "unpaid",
+    "createdAt": "2026-06-11T21:59:55.695Z",
+    "updatedAt": "2026-06-11T21:59:55.695Z"
   }
 ]

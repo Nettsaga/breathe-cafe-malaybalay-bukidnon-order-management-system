@@ -7,7 +7,6 @@
 // photobooth print animation.
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -294,14 +293,16 @@ export default function QrPayment({ order }: { order: Order }) {
           </div>
         )}
         {qrImage && !isLoading && (
-          <Image
+          // Plain <img>, not next/image: the QR is a base64 data URI (and a
+          // remote PayMongo URL in live mode). next/image gives no benefit here
+          // (it was already `unoptimized`) and its data-URI handling is what was
+          // leaving the QR box blank in production. A native <img> renders both
+          // data URIs and remote URLs with no remotePatterns dependency.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             src={qrImage}
             alt="QR Ph payment code"
-            width={220}
-            height={220}
             className="w-full h-full object-contain p-3"
-            priority
-            unoptimized
           />
         )}
       </div>

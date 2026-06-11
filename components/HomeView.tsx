@@ -12,7 +12,6 @@ import {
   Bean,
   Coffee,
   CupSoda,
-  Leaf,
   Cherry,
   Croissant,
   CakeSlice,
@@ -28,7 +27,7 @@ const CATEGORY_ICON: Record<string, LucideIcon> = {
   Signature: Bean,
   "Hot Coffee": Coffee,
   "Iced Coffee": CupSoda,
-  "Matcha Series": Leaf,
+  "Matcha Series": Coffee,
   "Fruit Tea": Cherry,
   Pastries: Croissant,
   Cakes: CakeSlice,
@@ -65,8 +64,8 @@ export default function HomeView({
   return (
     <div className="flex-1 flex flex-col bg-background">
       <main className="flex-1 max-w-md mx-auto w-full px-5 pb-6">
-        {/* Pinned header: greeting + search (does not scroll) */}
-        <div className="sticky top-0 z-20 bg-background/90 backdrop-blur -mx-5 px-5 pt-8 pb-3">
+        {/* Greeting + search (scrolls with the page) */}
+        <div className="pt-8 pb-2">
           <motion.div
             variants={fadeUp}
             initial="hidden"
